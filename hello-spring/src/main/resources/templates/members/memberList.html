@@ -1,0 +1,29 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div class="container">
+    <div>
+        <table>
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>이름</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="member : ${members}">
+                <td th:text="${member.id}"></td>
+                <td th:text="${member.name}"></td>
+                <!--
+                th:each는 타임리프 반복문
+                "member : ${members}"는 name이 members인 model을 model.addAttribute()로 보냈을때 각 요소를 member를
+                통해 처리한다.
+                ${member.id}는 member에 들어간 객체의 .getId()를 통해 return받은 값을 의미한다.
+                -->
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div> <!-- /container -->
+</body>
+</html>
