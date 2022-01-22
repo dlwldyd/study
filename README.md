@@ -9,11 +9,11 @@
 * shift+f10 : 이전에 실행했던 코드를 다시 샐행함
 * Ctrl+e : 최근에 봤던 파일 목록을 확인할 수 있다. 바로 엔터하면 바로 이전에 봤던 파일로 돌아갈 수 있다.
 * Shift+Tab : Tab(들여쓰기)의 반대
-* psvm(단축키는 아님) : 에디터에 psvm이라 치면 자동으로 public static void main(String args[])를 만들어주는 링크 나옴
+* psvm : 에디터에 psvm이라 치면 자동으로 public static void main(String args[]) 만들어줌
 * Ctrl+Alt+M : extract method 리팩토링 단축키
-* iter(단축키는 아님) : 에디터에 iter이라 치고 Tab누르면 for문 자동 완성
-* soutv(단축키는 아님) : 에디터에 soutv이라 치면 자동으로 System.out.println()을 만들어주는 링크 나옴(변수 출력)
-* soutm(단축키는 아님) : 에디터에 soutm이라 치면 자동으로 System.out.println()을 만들어주는 링크 나옴(메소드로 출력)
+* iter : 에디터에 iter이라 치고 Tab누르면 for문 자동 완성
+* soutv : 에디터에 soutv이라 치면 자동으로 System.out.println() 만들어줌(변수 출력)
+* soutm : 에디터에 soutm이라 치면 자동으로 System.out.println() 만들어줌(메소드로 출력)
 * Shift 2번 : search
 * Ctrl+f12 : 클래스 구성 볼 수 있음
 * Ctrl+O : 오버라이드할 함수 목록 볼 수 있음
