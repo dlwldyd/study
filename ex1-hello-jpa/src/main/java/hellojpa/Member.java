@@ -6,12 +6,12 @@ import java.util.Date;
 @Entity
 //@Table(name = "USER") : 엔티티가 저장될 테이블 이름을 지정할 수 있다.
 @SequenceGenerator( // SequenceGenerator 생성(직접 데이터베이스에서 create 할 수도 있음)
-        name = "MEMBER_SEQ_GENERATOR", // SequenceGenerator 이름(코드에서 사용)
+        name = "MEMBER_SEQ_GENERATOR", // SequenceGenerator 이름(JPA 에서 사용)
         sequenceName = "MEMBER_SEQ", // 매핑할 데이터베이스 SequenceGenerator 이름(데이터베이스에서의 이름)
         initialValue = 1, allocationSize = 2) // initialValue 기본값 : 1, allocationSize 기본값 : 50
 /*
 @TableGenerator( // TableGenerator(키 생성 전용 테이블) 생성(직접 데이터베이스에서 create 할 수도 있음)(잘 안씀)
-        name = "MEMBER_SEQ_GENERATOR", // TableGenerator 이름(코드에서 사용)
+        name = "MEMBER_SEQ_GENERATOR", // TableGenerator 이름(JPA 에서 사용)
         table = "MY_SEQUENCES", // TableGenerator(키 생성 전용 테이블) 이름
         pkColumnValue = "MEMBER_SEQ", allocationSize = 2)  // pkColumnValue : 기본키 값을 지정(컬럼 이름이 아니라 데이터로 들어가는 값)
 
