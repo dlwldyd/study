@@ -3,7 +3,7 @@ package hellojpa;
 import javax.persistence.*;
 import java.util.Date;
 
-@Entity
+//@Entity
 //@Table(name = "USER") : 엔티티가 저장될 테이블 이름을 지정할 수 있다.
 @SequenceGenerator( // SequenceGenerator 생성(직접 데이터베이스에서 create 할 수도 있음)
         name = "MEMBER_SEQ_GENERATOR", // SequenceGenerator 이름(JPA 에서 사용)
