@@ -84,6 +84,7 @@ public class JpaMain {
             //em.clear(); : 영속성 컨텍스트 전체를 준영속 상태로 만듦(영속성 컨텍스트를 완전히 초기화)
             //em.detach(member);
 
+            /*
             Team team = new Team();
             team.setName("TeamA");
             em.persist(team);
@@ -101,6 +102,22 @@ public class JpaMain {
             for (Member2 member2 : members) {
                 System.out.println("member = " + member2.getName());
             }
+             */
+
+            Child child1 = new Child();
+            Child child2 = new Child();
+
+            Parent parent = new Parent();
+            parent.addChild(child1);
+            parent.addChild(child2);
+
+            em.persist(parent);
+
+            em.flush();
+            em.clear();
+
+            Parent findParent = em.find(Parent.class, parent.getId());
+            findParent.getChildList().remove(0);
 
             //쓰기 지연 SQL 저장소에 저장되어 있던 쿼리를 db에 날림(flush) 그리고 데이터베이스 커밋
             tx.commit();
