@@ -4,6 +4,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class JpaMain {
@@ -104,20 +105,37 @@ public class JpaMain {
             }
              */
 
-            Child child1 = new Child();
-            Child child2 = new Child();
+            Address address = new Address("city", "street", "1000");
 
-            Parent parent = new Parent();
-            parent.addChild(child1);
-            parent.addChild(child2);
+            Member2 member1 = new Member2();
+            member1.setName("member1");
+            member1.setHomeAddress(address);
+//            member1.setWorkPeriod(new Period(LocalDateTime.now(), LocalDateTime.now()));
+            em.persist(member1);
 
-            em.persist(parent);
+            Member2 member2 = new Member2();
+            member2.setName("member2");
+            member2.setHomeAddress(address);
+            em.persist(member2);
+
+            member1.getFavoriteFoods().add("치킨");
+            member1.getFavoriteFoods().add("족발");
+            member1.getFavoriteFoods().add("피자");
+
+            member1.getAddressHistory().add(new Address("street1", "city1", "10000"));
+            member1.getAddressHistory().add(new Address("street2", "city2", "20000"));
 
             em.flush();
             em.clear();
 
-            Parent findParent = em.find(Parent.class, parent.getId());
-            findParent.getChildList().remove(0);
+            Member2 findMember = em.find(Member2.class, member1.getId());
+
+            findMember.getFavoriteFoods().remove("치킨");
+            findMember.getFavoriteFoods().add("한식");
+
+            // remove 하기 위해서 equals() and hashCode()를 오버라이드 해줘야한다.(안하면 삭제가 안됨)
+            findMember.getAddressHistory().remove(new Address("street1", "city1", "10000"));
+            findMember.getAddressHistory().add(new Address("street1", "newCity", "10000"));
 
             //쓰기 지연 SQL 저장소에 저장되어 있던 쿼리를 db에 날림(flush) 그리고 데이터베이스 커밋
             tx.commit();
