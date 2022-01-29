@@ -28,6 +28,7 @@
 * Ctrl+R : 문자열 찾아서 대체
 * Ctrl+Alt+N : 인라인 한줄로 만들기
 * f2 : 오류 있는 곳으로 바로 이동
+* Alt+Shift+insert : column selection mode
 # 자바
 ## Collection
 ## Stack
