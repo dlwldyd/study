@@ -3,6 +3,17 @@ package jpql;
 import javax.persistence.*;
 
 @Entity
+//어플리케이션 로딩 시점에 쿼리를 파싱해서 sql 로 변환해둠
+@NamedQueries(
+        {@NamedQuery(
+                name = "Member.findByUsername",
+                query = "select m from Member m where m.username = :username"
+        ),
+        @NamedQuery(
+                name = "Member.findTeamByUsername",
+                query = "select m.team from Member m join m.team where m.username = :username"
+        )}
+)
 public class Member {
 
     @Id

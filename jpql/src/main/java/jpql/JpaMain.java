@@ -1,6 +1,7 @@
 package jpql;
 
 import javax.persistence.*;
+import java.util.Collection;
 import java.util.List;
 
 public class JpaMain {
@@ -98,7 +99,7 @@ public class JpaMain {
             substring : select substring(m.username, 2, 3) from Member m -> 문자열 잘라서 반환
             locate : select locate('ber', m.username) from Member m -> 인덱스 반환
             lower, upper : select upper(m.username) from Member m -> 대소문자로 변환해서 반환
-            abs, sqrt, mod : 제곱, 제곱근, 나머지 반환
+            abs, sqrt, mod : 절대값, 제곱근, 나머지 반환
             length : 데이터 길이 반환
             size : select size(t.members) from Team t -> 컬렉션의 크기를 반환
              */
@@ -109,6 +110,49 @@ public class JpaMain {
             select function('group_concat', m.username) from Member m
              */
 
+            //상태 필드 -> 경로 탐색의 끝, 탐색이 더 이상 불가
+            List<String> resultList6 = em.createQuery("select m.username from Member m", String.class)
+                    .getResultList();
+
+            //단일값 연관경로(@ManyToOne, @OneToOne) -> 묵시적 내부조인 발생, 계속해서 탐색 가능(m.team -> m.team.name)
+            List<Team> resultList7 = em.createQuery("select m.team from Member m", Team.class)
+                    .getResultList();
+
+            //컬렉션 값 연관경로(@OneToMany, @ManyToMany) -> 묵시적 내부조인 발생, 탐색이 더 이상 불가(t.members.size 를 통해 리스트 사이즈는 받을 수 있음)
+            List<Collection> resultList8 = em.createQuery("select t.members from Team t", Collection.class)
+                    .getResultList();
+            //from 절에서 명시적 조인을 통해 별칭을 얻으면 계속해서 탐색 가능
+            List<String> resultList9 = em.createQuery("select m.username from Team t join t.members m", String.class)
+                    .getResultList();
+
+            //페치 조인 -> 즉시 로딩 전략처럼 동작
+            List<Member> resultList10 = em.createQuery("select m from Member m join fetch m.team", Member.class)
+                    .getResultList();
+
+            //컬렉션 페치 조인
+            List<Team> resultList11 = em.createQuery("select t from Team t join fetch t.members where t.name = 'teamA'", Team.class)
+                    .getResultList();
+            //중복 제거 -> sql 에서는 같은 row 일 경우에만 중복이 제거되지만 jpql 에서는 같은 엔티티일 때의 중복(application level)도 제거해준다
+            List<Team> resultList12 = em.createQuery("select distinct t from Team t join fetch t.members where t.name = 'teamA'", Team.class)
+                    .getResultList();
+
+            //select t from Team t join fetch t.members m join fetch m.team 같을 때만 컬렉션에 별칭사용
+            //select t from Team t join fetch t.members, t.orders 처럼 둘 이상 페치조인 불가
+
+            // 객체에서 다운캐스팅처럼 사용할 때 treat 를 사용한다.(Item 객체를 Book 으로 다운캐스팅, author 는 Book 에만 있음)
+            //List<Item> resultList13 = em.createQuery("select i from Item i where treat(i as Book).author", Item.class)
+            //        .getResultList();
+
+            //NameQuery 사용
+            List<Member> resultList13 = em.createNamedQuery("Member.findByUserName", Member.class)
+                    .setParameter("username", "member1")
+                    .getResultList();
+
+            //벌크연산, 영향을 받은 엔티티의 개수를 반환받음, 벌크 연산은 영속성 컨텍스트를 무시하고 데이터베이스에 직접 쿼리(영속성 컨텍스트에 반영X)
+            //벌크 연산 후 영속성 컨텍스트를 초기화 시켜야함(벌크 연산 후 clear())
+            //벌크 연산을 수행하면 수행하기 전에 flush 가 자동으로 수행되기 때문에 flush 는 고려하지 않아도 됨
+            int resultCount = em.createQuery("update m set m.age = 20")
+                    .executeUpdate();
 
             tx.commit();
         } catch (Exception e) {
