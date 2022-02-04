@@ -29,6 +29,9 @@
 * Ctrl+Alt+N : 인라인 한줄로 만들기
 * f2 : 오류 있는 곳으로 바로 이동
 * Alt+Shift+insert : column selection mode
+* Ctrl+Alt+p : 파라미터로 받기
+* Ctrl+Shift+f9 : devtools 사용 시 현재 파일만 재컴파일
+* Ctrl+Shift+u : 대소문자 변환
 # 자바
 ## Collection
 ## Stack
