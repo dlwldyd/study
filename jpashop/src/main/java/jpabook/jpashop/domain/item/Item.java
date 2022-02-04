@@ -1,16 +1,18 @@
-package jpabook.jpashop.domain;
+package jpabook.jpashop.domain.item;
 
-import jdk.jfr.Enabled;
+import jpabook.jpashop.domain.Category;
+import jpabook.jpashop.exception.NotEnoughStockException;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
-@Enabled
+@Entity
 @Getter
 @Setter
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public abstract class Item {
 
     @Id
@@ -23,4 +25,25 @@ public abstract class Item {
     private int price;
 
     private int stockQuantity;
+
+    @ManyToMany(mappedBy = "items", fetch = FetchType.LAZY)
+    private List<Category> categories = new ArrayList<>();
+
+    /**
+     * 재고 수량 증가
+     */
+    public void addStockQuantity(int quantity) {
+        this.stockQuantity += quantity;
+    }
+
+    /**
+     * 재고 수량 감소
+     */
+    public void removeStock(int quantity) {
+        int restStock = this.stockQuantity - quantity;
+        if (restStock < 0) {
+            throw new NotEnoughStockException("need more stock");
+        }
+        this.stockQuantity = restStock;
+    }
 }
