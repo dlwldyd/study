@@ -77,7 +77,8 @@
 * .flatMap(람다식)은 stream이 List, Set, Map 등으로 이루어져 있을때 사용한다. 만약 flatMap 대신 Map을 사용한다면 List, Set, Map 내의 요소에 대한 filter()등을 적용하지 못한다.(즐겨찾기)
 * .limit(int)를 사용하여 stream생성시 stream의 길이에 제한을 둘 수 있다.
 * stream을 .toArray()를 이용하여 배열로 만들 때 기본타입 배열로 만들경우에는 매개변수를 안넣어줘도 되지만 객체나 wrapper 클래스인 배열을 만들 경우에는 .toArray(Integer::new)처럼 매개변수를 넣어줘야한다.
-* forEach(), filter(), ifPresent()
+* forEach() : map()은 스트림의 값 자체를 바꾸지만 forEach()는 스트림의 값 자체를 변경하는게 아니라 값을 꺼내서 그 값으로 작업을 할 때 사용한다.
+* filter() : filter(람다식)의 람다식이 참이면 해당 값을 필터링한다.
 ## Optional
 * .get()메소드를 통해 Optional객체에 저장된 값에 접근할 수 있다.
 * .orElse(인수)는 Optional객체가 null이 아니면 그 값을 받고 null이면 orElse안의 인수를 받는다.
