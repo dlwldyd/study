@@ -73,7 +73,7 @@
 * .map(람다식)은 stream의 데이터(객체)들을 람다식에 맞추어 변형해준다. stream객체가 반환된다(IntSteam이면 IntStream, DoubleStream이면 DoubleStream 등 자기자신과 같은 타입으로 반환) mapToInt(람다식)은 IntStream으로, mapToDouble(람다식)은 DoubleStream으로 반환한다.(다른 것도 이와 같은 원리 단, mapToObj(람다식)은 각 요소가 객체인 Stream으로 반환한다.)
 * .collect(Collectors 메소드)는 Collectors 메소드를 사용할 수 있도록 한다. Collectors 메소드에는 .toList(), .toSet() .toMap(key, value), .toCollection() 등 원하는 Collection 객체로 만드는 함수가 있다. 그리고 Collectors.joining() 처럼 문자열을 이어붙이는 함수 등 다른 함수도 많다.(즐겨찾기) 배열을 얻고 싶다면 .collect함수를 없이 stream.toArray()를 쓰면 배열로 변환되어 반환된다.
 * .sorted(람다식)은 람다식을 comparator의 compare함수와 같이 이용해서 stream을 정렬할 수 있다. 일반적인 경우처럼 comparator 객체를 넘겨줘도 된다.
-* .groupingBy(그룹화할 값, Collectors 메소드)은 해당 스트림을 그룹화할 값으로 그룹화해 Map으로 반환한다. 2번째 인수를 안넣으면 default로 value가 List의 형태로 저장되고 .groupingBy(그룹화할 값, toSet()) 처럼 두번째 인수를 Collectors 메소드를 넣어주면 그 함수가 반환하는 객체로 value가 저장된다.
+* .groupingBy(그룹화할 값(람다식), Collectors 메소드)은 해당 스트림을 그룹화할 값으로 그룹화해 Map으로 반환한다.(그룹화할 값이 Map의 key가 된다) 2번째 인수를 안넣으면 default로 value가 List의 형태로 저장되고 .groupingBy(그룹화할 값(람다식), toSet()) 처럼 두번째 인수를 Collectors 메소드를 넣어주면 그 함수가 반환하는 객체로 value가 저장된다.
 * .flatMap(람다식)은 stream이 List, Set, Map 등으로 이루어져 있을때 사용한다. 만약 flatMap 대신 Map을 사용한다면 List, Set, Map 내의 요소에 대한 filter()등을 적용하지 못한다.(즐겨찾기)
 * .limit(int)를 사용하여 stream생성시 stream의 길이에 제한을 둘 수 있다.
 * stream을 .toArray()를 이용하여 배열로 만들 때 기본타입 배열로 만들경우에는 매개변수를 안넣어줘도 되지만 객체나 wrapper 클래스인 배열을 만들 경우에는 .toArray(Integer::new)처럼 매개변수를 넣어줘야한다.

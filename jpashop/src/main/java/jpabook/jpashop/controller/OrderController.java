@@ -52,5 +52,6 @@ public class OrderController {
     public String cancelOrder(@PathVariable Long orderId) {
         orderService.cancelOrder(orderId);
         return "redirect:/orders";
+
     }
 }
