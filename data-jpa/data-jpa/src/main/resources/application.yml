@@ -1,0 +1,17 @@
+spring:
+  datasource:
+    url: jdbc:h2:tcp://localhost/~/datajpa
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        format_sql: true
+        default_batch_fetch_size: 100
+logging:
+  level:
+    org.hibernate.SQL: debug # 로거를 통해 실행되는 쿼리 출력
