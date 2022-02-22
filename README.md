@@ -32,6 +32,8 @@
 * Ctrl+Alt+p : 파라미터로 받기
 * Ctrl+Shift+f9 : devtools 사용 시 현재 파일만 재컴파일
 * Ctrl+Shift+u : 대소문자 변환
+* Ctrl+Shift+(↑ or ↓) : 메서드 위치 변경
+* Alt+f8 : evaluate
 # 자바
 ## Collection
 ## Stack
