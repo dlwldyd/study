@@ -26,6 +26,7 @@ public class SingletonTest {
 
     @Scope("singleton")
     static class SingletonBean{
+        //싱글톤 빈은 PostConstruct가 빈이 초기화 되는 시점에 실행된다.(조회 시점에 실행X)
         @PostConstruct
         public void init(){
             System.out.println("SingletonBean.init");

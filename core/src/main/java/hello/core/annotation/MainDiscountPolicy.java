@@ -14,6 +14,7 @@ import java.lang.annotation.*;
 @Inherited
 //해당 어노테이션을 Javadoc에 포함한다.
 @Documented
+//@Qualifier("mainDiscountPolicy")를 그대로 붙이면 컴파일시 타입 체크가 안된다. 그래스 다음 같은 어노테이션을 만들어서 문제를 해결할 수 있다.
 @Qualifier("mainDiscountPolicy")
 public @interface MainDiscountPolicy {
 
