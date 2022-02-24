@@ -7,16 +7,23 @@
 <body>
 <h1>식 기본 객체 (Expression Basic Objects)</h1>
 <ul>
+<!--    HttpServletRequest 참조, 메서드도 사용 가능-->
     <li>request = <span th:text="${#request}"></span></li>
+<!--    HttpServletResponse 참조, 메서드도 사용 가능-->
     <li>response = <span th:text="${#response}"></span></li>
+<!--    Session 참조, 메서드도 사용 가능-->
     <li>session = <span th:text="${#session}"></span></li>
+<!--    ServletContext 참조, 메서드도 사용 가능-->
     <li>servletContext = <span th:text="${#servletContext}"></span></li>
     <li>locale = <span th:text="${#locale}"></span></li>
 </ul>
 <h1>편의 객체</h1>
 <ul>
+<!--    request.getParameter("paramData")-->
     <li>Request Parameter = <span th:text="${param.paramData}"></span></li>
+<!--    request.getSession().getAttribute("sessionData")-->
     <li>session = <span th:text="${session.sessionData}"></span></li>
+<!--    스프링 빈 참조, helloBean 스프링 빈 객체의 hello(String) 메서드 참조-->
     <li>spring bean = <span th:text="${@helloBean.hello('Spring!')}"></span></li>
 </ul>
 </body>

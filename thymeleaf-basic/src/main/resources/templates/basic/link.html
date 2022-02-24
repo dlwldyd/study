@@ -7,9 +7,13 @@
 <body>
 <h1>URL 링크</h1>
 <ul>
+<!--  url에 쿼리 파라미터를 안 넣을 때-->
   <li><a th:href="@{/hello}">basic url</a></li>
+<!--  url에 쿼리 파라미터를 넣을 때-->
   <li><a th:href="@{/hello(param1=${param1}, param2=${param2})}">hello query param</a></li>
+<!--  url에 PathVariable을 넣을 때, URL 경로상에 변수가 있으면 () 부분은 PathVariable로 처리된다.-->
   <li><a th:href="@{/hello/{param1}/{param2}(param1=${param1}, param2=${param2})}">path variable</a></li>
+<!--  url에 PathVariable, 쿼리 파라미터를 넣을 때, URL 경로상에 변수가 있는 부분은 PathVariable로, 없으면 쿼리 파라미터로 전달된다.-->
   <li><a th:href="@{/hello/{param1}(param1=${param1}, param2=${param2})}">path variable + query parameter</a></li>
 </ul>
 </body>

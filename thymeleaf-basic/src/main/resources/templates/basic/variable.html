@@ -5,6 +5,7 @@
     <title>Title</title>
 </head>
 <body>
+<!--User 객체가 Model에 담겨 전달됨, User 객체는 username, age를 멤버로 가짐-->
 <h1>SpringEL 표현식</h1>
 <ul>Object
     <li>${user.username} = <span th:text="${user.username}"></span></li>
@@ -12,13 +13,16 @@
     <li>${user.getUsername()} = <span th:text="${user.getUsername()}"></span></
     li>
 </ul>
+<!--List<User>가 Model에 담겨 전달됨-->
 <ul>List
     <li>${users[0].username} = <span th:text="${users[0].username}"></
         span></li>
     <li>${users[0]['username']} = <span th:text="${users[0]['username']}"></
         span></li>
+<!--    getter 필요-->
     <li>${users[0].getUsername()} = <span th:text="${users[0].getUsername()}"></span></li>
 </ul>
+<!--Map<User>가 Model에 담겨 전달됨-->
 <ul>Map
     <li>${userMap['userA'].username} = <span th:text="${userMap['userA'].username}"></span></li>
     <li>${userMap['userA']['username']} = <span th:text="${userMap['userA']['username']}"></span></li>
@@ -26,6 +30,7 @@
 </ul>
 
 <h1>지역 변수 - (th:with)</h1>
+<!--지역변수 사용, first 라는 지역 변수에 List<User>.get(0)의 User객체가 저장됨-->
 <div th:with="first=${users[0]}">
     <p>처음 사람의 이름은 <span th:text="${first.username}"></span></p>
 </div>

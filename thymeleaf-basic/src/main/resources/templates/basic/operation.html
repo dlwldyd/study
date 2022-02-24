@@ -29,14 +29,17 @@
   </li>
   <li>Elvis 연산자
     <ul>
-      <li>${data}?: '데이터가 없습니다.' = <span th:text="${data}?: '데이터가없습니다.'"></span></li>
+<!--      Model에 data라는 key로 값이 있으면 해당 값을 출력하고 없으면 '데이터가 없습니다.'가 출력됨(정확히 말하면 th:text='데이터가 없습니다.'가 실행됨)-->
+      <li>${data}?: '데이터가 없습니다.' = <span th:text="${data}?: '데이터가 없습니다.'"></span></li>
+<!--      Model에 nullData라는 key로 값이 있으면 해당 값을 출력하고 없으면 '데이터가 없습니다.'가 출력됨-->
       <li>${nullData}?: '데이터가 없습니다.' = <span th:text="${nullData}?: '데이터가 없습니다.'"></span></li>
     </ul>
   </li>
   <li>No-Operation
     <ul>
-      <li>${data}?: _ = <span th:text="${data}?: _">데이터가 없습니다.</
-        span></li>
+<!--      Model에 data라는 key로 값이 들어있으면 해당 값을 출력하고 없으면 해당 타임리프 구문이 실행되지 않음('데이터가 없습니다.'가 출력됨)-->
+      <li>${data}?: _ = <span th:text="${data}?: _">데이터가 없습니다.</span></li>
+<!--      Model에 nullData라는 key로 값이 들어있으면 해당 값을 출력하고 없으면 해당 타임리프 구문이 실행되지 않음-->
       <li>${nullData}?: _ = <span th:text="${nullData}?: _">데이터가 없습니다.</span></li>
     </ul>
   </li>

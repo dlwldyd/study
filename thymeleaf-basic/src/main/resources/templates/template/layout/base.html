@@ -1,10 +1,13 @@
 <html xmlns:th="http://www.thymeleaf.org">
+<!--title, links 라는 이름의 파라미터를 전달하는게 아니라 태그를 받음, 받는 쪽에서는 이름 마음대로 설정 가능(title이 아니라 aaa라 해도됨)-->
 <head th:fragment="common_header(title,links)">
+<!--    받은 태그를 th:replace 함-->
   <title th:replace="${title}">레이아웃 타이틀</title>
   <!-- 공통 -->
   <link rel="stylesheet" type="text/css" media="all" th:href="@{/css/awesomeapp.css}">
   <link rel="shortcut icon" th:href="@{/images/favicon.ico}">
   <script type="text/javascript" th:src="@{/sh/scripts/codebase.js}"></script>
  <!-- 추가 -->
+<!--    받은 태그가 여러개일 경우 th:block 을 이용해 묶어주어야 한다.-->
  <th:block th:replace="${links}" />
 </head>

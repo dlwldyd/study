@@ -7,11 +7,12 @@
 <body>
 <h1>리터럴</h1>
 <ul>
-    <!--주의! 다음 주석을 풀면 예외가 발생함-->
-    <!-- <li>"hello world!" = <span th:text="hello world!"></span></li>-->
+    <!-- <li>"hello world!" = <span th:text="hello world!"></span></li> 문자 리터럴을 작은 따옴표로 감싸지 않아 예외 발생-->
+<!--    문자 리터럴은 작은 따옴표로 감싸서 사용해야 한다. 단, 문자가 공백 없이 이어질 경우에는 작은 따옴표로 감쌀 필요 없다.-->
     <li>'hello' + ' world!' = <span th:text="'hello' + ' world!'"></span></li>
     <li>'hello world!' = <span th:text="'hello world!'"></span></li>
     <li>'hello ' + ${data} = <span th:text="'hello ' + ${data}"></span></li>
+<!--    리터럴 대체 문법을 사용하면 문자 리터럴을 작은 따옴표로 감싸지 않아도 된다.-->
     <li>리터럴 대체 |hello ${data}| = <span th:text="|hello ${data}|"></span></li>
 </ul>
 </body>

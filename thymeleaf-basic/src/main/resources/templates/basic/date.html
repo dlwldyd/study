@@ -7,7 +7,9 @@
 <body>
 <h1>LocalDateTime</h1>
 <ul>
+<!--    LocalDateTime 타입의 객체 필요-->
     <li>default = <span th:text="${localDateTime}"></span></li>
+<!--    제일 많이 사용-->
     <li>yyyy-MM-dd HH:mm:ss = <span th:text="${#temporals.format(localDateTime,'yyyy-MM-dd HH:mm:ss')}"></span></li>
 </ul>
 <h1>LocalDateTime - Utils</h1>

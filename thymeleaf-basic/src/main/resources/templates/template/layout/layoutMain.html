@@ -1,7 +1,13 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+<!--
+~{::tagName}은 템플릿 조각에서 해당 이름의 파라미터를 전달 받는게 아니라 이쪽에서 해당 이름의 태그를 템플릿 조각(레이아웃)으로
+전달한다. 전달된 태그는 레이아웃에서 th:replace, th:insert 등의 작업을 한 후에 아래의 <head> 태그를 th:replace 한다.
+-->
 <head th:replace="template/layout/base :: common_header(~{::title},~{::link})">
+<!--  ~{::title}에 의해 th:replace 속성이 정의된 태그(<head>) 내의 title 태그 전부는 레이아웃으로 전달됨-->
   <title>메인 타이틀</title>
+<!--  ~{::link}에 의해 th:replace 속성이 정의된 태그(<head>) 내의 link 태그 전부는 레이아웃으로 전달됨-->
   <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
   <link rel="stylesheet" th:href="@{/themes/smoothness/jquery-ui.css}">
 </head>

@@ -8,16 +8,17 @@
 <h1>예시</h1>
 <span th:text="${data}">html data</span>
 <h1>1. 표준 HTML 주석</h1>
-<!--
+<!-- 렌더링 하지 않고 그대로 남겨둠
 <span th:text="${data}">html data</span>
 -->
 <h1>2. 타임리프 파서 주석</h1>
+<!--렌더링에서 주석부분 제거-->
 <!--/* [[${data}]] */-->
 <!--/*-->
 <span th:text="${data}">html data</span>
 <!--*/-->
 <h1>3. 타임리프 프로토타입 주석</h1>
-<!--/*/
+<!--/*/ 타임리프로 렌더링 한 경우에는 정상적으로 렌더링함, 렌더링 하지않고 파일 자체를 열어버리면 주석처리됨
 <span th:text="${data}">html data</span>
 /*/-->
 </body>

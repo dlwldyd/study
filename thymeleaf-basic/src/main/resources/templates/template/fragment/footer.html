@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+<!--이 파일에는 템플릿 조각이 2개 있음-->
 <body>
+<!--copy라는 이름의 템플릿 조각-->
 <footer th:fragment="copy">
     푸터 자리 입니다.
 </footer>
-<footer th:fragment="copyParam (param1, param2)">
+<!--copyParam이라는 이름의 템플릿 조각(파라미터 전달 가능, Model의 key와 중복되지 않게 하자)-->
+<footer th:fragment="copyParam(param1, param2)">
     <p>파라미터 자리 입니다.</p>
     <p th:text="${param1}"></p>
     <p th:text="${param2}"></p>

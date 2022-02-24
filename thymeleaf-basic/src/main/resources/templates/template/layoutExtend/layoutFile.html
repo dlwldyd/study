@@ -1,10 +1,13 @@
 <!DOCTYPE html>
-<html th:fragment="layout (title, content)" xmlns:th="http://www.thymeleaf.org">
+<!--레이아웃으로부터 title 태그와 section 태그를 전달 받음, 받는 쪽에서는 이름 마음대로 설정 가능-->
+<html th:fragment="layout(title, content)" xmlns:th="http://www.thymeleaf.org">
 <head>
+<!--    전달 받은 title 태그를 th:replace-->
     <title th:replace="${title}">레이아웃 타이틀</title>
 </head>
 <body>
 <h1>레이아웃 H1</h1>
+<!--전달 받은 section 태그를 th:replace-->
 <div th:replace="${content}">
     <p>레이아웃 컨텐츠</p>
 </div>

@@ -7,15 +7,27 @@
 <body>
 <h1>부분 포함</h1>
 <h2>부분 포함 insert</h2>
+<!--해당 파일에 있는 copy라는 이름의 템플릿 조각을 태그 내에 추가-->
+<!-- 결과
+<div>
+템플릿 조각
+</div>
+-->
 <div th:insert="~{template/fragment/footer :: copy}"></div>
 
 <h2>부분 포함 replace</h2>
+<!--해당 파일에 있는 copy라는 이름의 템플릿 조각을 해당 태그와 대체-->
+<!-- 결과
+템플릿 조각(div 태그는 없어짐)
+-->
 <div th:replace="~{template/fragment/footer :: copy}"></div>
 
+<!-- ~{...}를 사용하는게 원칙이지만 이렇게도 사용가능 하지만 ~{...}를 사용하도록 하자-->
 <h2>부분 포함 단순 표현식</h2>
 <div th:replace="template/fragment/footer :: copy"></div>
 
 <h1>파라미터 사용</h1>
+<!--해당 파일에 있는 copyParam이라는 이름의 템플릿 조각을 해당 태그와 대체, 템플릿 조각에 파라미터를 전달할 수도 있다.-->
 <div th:replace="~{template/fragment/footer :: copyParam ('데이터1', '데이터2')}"></div>
 </body>
 </html>

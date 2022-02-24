@@ -6,6 +6,7 @@
 </head>
 <body>
 <h1>기본 테이블</h1>
+<!--List<User>가 Model에 담김, key는 users-->
 <table border="1">
     <tr>
         <th>username</th>
@@ -24,18 +25,28 @@
         <th>age</th>
         <th>etc</th>
     </tr>
+<!--    userStat을 사용해 반복의 상태 확인 가능, 지정한 변수명(user) + Stat으로 이름 지어야함-->
     <tr th:each="user, userStat : ${users}">
+<!--        count = index + 1 이라 보면됨-->
         <td th:text="${userStat.count}">username</td>
         <td th:text="${user.username}">username</td>
         <td th:text="${user.age}">0</td>
         <td>
+<!--            현재 index-->
             index = <span th:text="${userStat.index}"></span>
+<!--            현재 index + 1-->
             count = <span th:text="${userStat.count}"></span>
+<!--            전체 size-->
             size = <span th:text="${userStat.size}"></span>
+<!--            index의 짝수 여부-->
             even? = <span th:text="${userStat.even}"></span>
+<!--            index의 홀수 여부-->
             odd? = <span th:text="${userStat.odd}"></span>
+<!--            현재 index가 처음인지-->
             first? = <span th:text="${userStat.first}"></span>
+<!--            현재 index가 마지막인지-->
             last? = <span th:text="${userStat.last}"></span>
+<!--            현재 객체(user)-->
             current = <span th:text="${userStat.current}"></span>
         </td>
     </tr>

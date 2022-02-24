@@ -4,24 +4,56 @@
   <meta charset="UTF-8">
   <title>Title</title>
 </head>
+<!--
+user.username = 'UserA'
+user.age = 10
+-->
+<!--자바스크립트 인라인은 자바스크립트 내에서 타임리프를 사용할 때 사용한다.-->
 <body>
 <!-- 자바스크립트 인라인 사용 전 -->
 <script>
+ //var username = userA -> 라는 변수가 저장됨(원래 목적은 username 에 "userA"라는 문자열 저장)
  var username = [[${user.username}]];
+ //var age = 10 -> 숫자는 쌍따옴표가 필요 없기 때문에 10이 정상적으로 저장됨
  var age = [[${user.age}]];
- //자바스크립트 내추럴 템플릿
+ /*
+ 자바 스크립트 내추럴 템플릿으로 열면(파일 자체를 열면) 주석 부분은 주석으로 처리되고 username2에는 "test username"이 저장되고,
+ 타임리프로 렌더링 되면 주석 내의 부분이 렌더링 되어 username2에 "userA"가 저장되는 것이 목적이다.
+ 하지만 자바스크립트 인라인을 사용하지 않으면 아래의 구문은 var username2 = /*userA*/ "test username" 으로 렌더링되어
+ username2에 "test username"이 저장된다.
+ */
  var username2 = /*[[${user.username}]]*/ "test username";
- //객체
+ //객체를 저장할 때 자바스크립트 인라인을 사용하지 않으면 객체의 참조값이 그대로 저장된다.
+ //var user = hello.thymeleaf.basic.BasicController$User@7f3dcead;
  var user = [[${user}]];
 </script>
 <!-- 자바스크립트 인라인 사용 후 -->
 <script th:inline="javascript">
+ //var username = "userA" -> 원래의 목적대로 문자열 자체가 저장된다.
  var username = [[${user.username}]];
+ //var username = 10 -> 숫자는 쌍따옴표로 감쌀 필요가 없기 때문에 자바 스크립트 인라인을 사용하던 사용 안하던 똑같다.
  var age = [[${user.age}]];
- //자바스크립트 내추럴 템플릿
+ /*
+ 자바스크립트 내추럴 템플릿으로 열면(파일 자체를 열면) 자바 스크립트 인라인을 사용할 때와 사용하지 않을 때와 똑같이 username2에
+ "test username"이 저장된다. 하지만 타임리프로 렌더링 되면 var username2 = "userA"으로 렌더링 되어 username2에
+ "userA"가 저장된다.
+ */
  var username2 = /*[[${user.username}]]*/ "test username";
- //객체
+ //객체를 저장할 때 자바스크립트 인라인을 사용하면 JSON으로 변환되어 저장된다.
+ //var user = {"username":"userA","age":10};
  var user = [[${user}]];
 </script>
+<!-- 자바스크립트 인라인 each -->
+<!--List<User>가 Model에 users라는 key로 담겼다고 가정-->
+<!--반복문으로 인해 생성되는 변수 이름은 each에 쓰여진 변수이름 + count로 이름지어짐-->
+<script th:inline="javascript">
+ [# th:each="user, userStat : ${users}"]
+ var user[[${userStat.count}]] = [[${user}]];
+ [/]
+</script>
+<!--실행 결과-->
+<!--var user1 = {"username":"userA","age":10};-->
+<!--var user2 = {"username":"userB","age":20};-->
+<!--var user3 = {"username":"userC","age":30};-->
 </body>
 </html>
