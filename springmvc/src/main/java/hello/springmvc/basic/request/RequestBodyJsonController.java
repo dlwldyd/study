@@ -67,6 +67,8 @@ public class RequestBodyJsonController {
         return "ok";
     }
 
+    //json 반환 시 content-type 이 application/json 인지 꼭 확인해야 한다
+    //@RestController 거나 @ResponseBody 가 꼭 붙어야한다.
     @ResponseBody
     @PostMapping("/request-body-json-v5")
     public HelloData requestBodyJsonV5(@RequestBody HelloData helloData)  {
