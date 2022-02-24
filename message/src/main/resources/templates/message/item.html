@@ -22,6 +22,9 @@
     <h2 th:if="${param.status}" th:text="'저장 완료'"></h2>
 
     <div>
+<!--        accept-language 헤더 값에 따라 국제화 파일을 선택한다.
+            Locale Resolver 의 구현체를 변경해서 쿠키나 세션기반의 Locale 선택기능을 사용할 수도 있다.
+-->
         <label for="itemId" th:text="#{label.item.id}">상품 ID</label>
         <input type="text" id="itemId" name="itemId" class="form-control" value="1" th:value="${item.id}" readonly>
     </div>
