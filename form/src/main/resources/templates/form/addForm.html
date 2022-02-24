@@ -17,10 +17,15 @@
     <div class="py-5 text-center">
         <h2>상품 등록 폼</h2>
     </div>
-
+<!--    th:object 는 form 태그에서 사용할 객체를 지정한다. 이것을 지정하면 *{...}를 쓸 수 있다.-->
     <form action="item.html" th:action th:object="${item}" method="post">
         <div>
             <label for="itemName">상품명</label>
+<!--            *{itemName}은 ${item.itemName}과 같다.-->
+<!--            th:field는 id, name, value 속성을 자동으로 만들어준다. id, name 은 field에 지정한 변수의 이름과 같고(itemName)
+                value는 지정한 변수의 값을 사용한다.(itemName이 "컴퓨터"면 th:value="'컴퓨터'"가 된다.
+                이 외에도 여러 장점이 있기 때문에 왠만하면 th:field를 사용하는 것이 좋다.
+-->
             <input type="text" id="itemName" th:field="*{itemName}" class="form-control" placeholder="이름을 입력하세요">
         </div>
         <div>
@@ -37,6 +42,7 @@
         <div>판매 여부</div>
         <div>
             <div class="form-check">
+<!--                th:field 는 체크박스의 히든 필드를 자동으로 생성해준다.-->
                 <input type="checkbox" id="open" th:field="*{open}" class="form-check-input">
                 <label for="open" class="form-check-label">판매 오픈</label>
             </div>
@@ -45,6 +51,26 @@
         <!-- multi checkbox -->
         <div>
             <div>등록 지역</div>
+<!--            th:each를 통해 동적으로 태그를 만들 때 id는 모두 다르게 설정 되어야 하므로 th:field에 정의된 id(regions)
+                에 숫자(인덱스, 1부터 시작)가 붙어서 id가 만들어 진다. 그리고 for 속성으로 이러한 id를 지정하기 위해서는
+                th:for="${#ids.prev(...)}, th:for="${#ids.next(...)}, th:for="${#ids.seq(...)}를 사용해야 한다.
+
+                #ids.prev(...) : 이전에 사용했던 인덱스, 아래의 div 태그를 보면 th:each 에 의해 생성되는 첫 번째
+                input 태그는 id="regions1"로 생성된다. 그리고 label 태그가 생성될 때 이전에 사용했던 인덱스가 1이므로
+                for="regions1"로 label 태그가 생성된다.
+
+                #ids.next(...) : 다음에 사용할 인덱스, 아래의 div 태그를 보면 th:each 에 의해 생성되는 첫 번째
+                input 태그는 id="regions1"로 생성된다. 그리고 label 태그가 생성될 때 다음에 사용할 인덱스가 2이므로
+                #ids.next(...)를 사용한다면 for="regions2"로 label 태그가 생성된다. 그렇기 때문에 #ids.next(...)
+                를 사용하려면 input 태그와 label 태그의 순서를 바꿔야 한다.
+
+                #ids.seq(...) : 다음에 사용할 인덱스를 사용하고 +1을 시킨다. 아래의 div 태그를 보면 th:each 에 의해
+                생성되는 첫 번째 input 태그는 id="regions1"로 생성된다. 그리고 label 태그가 생성될 때 다음에 사용할
+                인덱스가 2이므로 #ids.seq(...)를 사용한다면 for="regions2"로 label 태그가 생성된다. 그리고 +1을 하므로
+                다음에 생성되는 input 태그는 id="regions3"로 생성된다. 그리고 다음에 사용될 인덱스는 4 이므로
+                for="regions4"로 label 태그가 생성된다.
+                #ids.seq(...) 사용하려면 input 태그랑 label 태그를 분리해서 따로 th:each 로 반복문 써야할듯?
+-->
             <div th:each="region : ${regions}" class="form-check form-check-inline">
                 <input type="checkbox" th:field="*{regions}" th:value="${region.key}" class="form-check-input">
                 <label th:for="${#ids.prev('regions')}" th:text="${region.value}" class="form-check-label">서울</label>

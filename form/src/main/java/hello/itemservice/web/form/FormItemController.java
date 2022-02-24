@@ -22,7 +22,7 @@ public class FormItemController {
 
     private final ItemRepository itemRepository;
 
-    //FromItemController 가 호출될 때마다 model 에 이름이 "regions" 값이 함수의 리턴값이 항상 담기게 된다.
+    //FromItemController 가 요청될 때마다 해당 메서드 호출되어 해당 메서드가 반환하는 값이 key 가 "regions" 로 Model에 항상 담기게 된다.
     @ModelAttribute("regions")
     public Map<String, String> regions() {
         Map<String, String> regions = new LinkedHashMap<>(); //순서가 보장되는 map
