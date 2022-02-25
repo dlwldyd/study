@@ -29,6 +29,8 @@ public class ValidationItemControllerV2 {
     private final ItemRepository itemRepository;
     private final ItemValidator itemValidator;
 
+    //validator 추가, @InitBinder 어노테이션 붙여야함, 해당 컨트롤러에서만 Validator 적용
+    //글로벌 설정으로 추가할 수 있지만 그러면 bean validation 이 동작하지 않기 때문에 글로벌 설정은 안하는 것이 좋음
     @InitBinder
     public void init(WebDataBinder dataBinder) {
         dataBinder.addValidators(itemValidator);
@@ -218,6 +220,7 @@ public class ValidationItemControllerV2 {
 
     @PostMapping("/add")
     //@Validated 어노테이션을 넣은 객체에 자동으로 검증이 실행된다.
+    //BindingResult 는 검증하려는 객체(보통은 @Validated 가 붙은 객체) 뒤에 넣어야 한다.
     public String addItemV6(@Validated @ModelAttribute Item item, BindingResult bindingResult, RedirectAttributes redirectAttributes, Model model) {
 
         //검증에 실패하면 다시 입력 폼으로

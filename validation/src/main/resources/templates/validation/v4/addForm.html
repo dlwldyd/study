@@ -23,17 +23,23 @@
     </div>
 
     <form action="item.html" th:action th:object="${item}" method="post">
-
+<!--            글로벌 에러 처리
+                #fields 로 BindingResult 가 제공하는 검증 오류에 접근할 수 있다.
+                여기서 globalErrors 는 하나의 필드에 대한 에러가 아닌 복합적 이유(2개 이상의 필드 등)로 인한 에러를 말한다.
+-->
             <div th:if="${#fields.hasGlobalErrors()}">
                 <p th:each="err : ${#fields.globalErrors()}" class="field-error" th:text="${err}">글로벌 오류 메시지</p>
             </div>
 
         <div>
             <label for="itemName" th:text="#{label.item.itemName}">상품명</label>
-            <!--타임리프는 정상동작할 때 th:field 는 모델의 item.itemName 을 value 로 가져오지만
+<!--        필드 에러 처리
+            타임리프는 정상동작할 때 th:field 는 모델의 item.itemName 을 value 로 가져오지만
             에러 발생 시 bindingResult 에서 넘어온 rejectedValue 값을 사용함-->
+<!--           th:errorclass는 th:field 에서 지정한 필드에 오류가 있으면 th:classappend와 같이 class 정보를 추가한다-->
             <input type="text" id="itemName" th:field="*{itemName}"
                    th:errorclass="field-error" class="form-control" placeholder="이름을 입력하세요">
+<!--            th:errors는 해당 필드에 오류가 있는 경우에 태그를 출력한다.(메세지 출력) th:if 의 편의 버전이다.-->
             <div class="field-error" th:errors="*{itemName}">
                 상품명 오류
             </div>

@@ -9,8 +9,10 @@ import org.springframework.validation.Validator;
 @Component
 public class ItemValidator implements Validator {
 
+    //@Validated 가 붙은 객체에 대해 supports() 메서드가 참을 반환하면 검증을 한다.(validate() 메서드 호출)
     @Override
     public boolean supports(Class<?> clazz) {
+        //Item 타입으로 캐스팅 가능하면 참을 반환함
         return Item.class.isAssignableFrom(clazz);
     }
 
@@ -22,6 +24,7 @@ public class ItemValidator implements Validator {
 
         //검증 로직
         if (!StringUtils.hasText(item.getItemName())) {
+            //rejectValue -> errors 에 필드에러 추가
             errors.rejectValue("itemName", "required");
         }
         if (item.getPrice() == null || item.getPrice() < 1000 || item.getPrice() > 1000000) {
@@ -36,6 +39,7 @@ public class ItemValidator implements Validator {
         if (item.getPrice() != null && item.getQuantity() != null) {
             int resultPrice = item.getPrice() * item.getQuantity();
             if (resultPrice < 10000) {
+                //reject -> errors 에 글로벌 에러 추가(그래서 파라미터로 필드 타입을 받지 않음)
                 errors.reject("totalPriceMin", new Object[]{10000, resultPrice}, null);
             }
         }
