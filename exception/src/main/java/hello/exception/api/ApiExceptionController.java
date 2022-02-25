@@ -39,7 +39,7 @@ public class ApiExceptionController {
         throw new BadRequestException();
     }
 
-    //내가만든 예외가 아닐 경우 ResponseStatusException 을 throw 하면 된다.
+    //내가만든 예외가 아닐 경우 ResponseStatusException 을 만들어 throw 하면 된다.
     @GetMapping("/api/response-status-ex2")
     public String responseStatusEx2() {
         throw new ResponseStatusException(HttpStatus.NOT_FOUND, "error.bad", new IllegalArgumentException());
