@@ -10,6 +10,7 @@ import org.springframework.format.FormatterRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
+//타입 컨버터나 포맷터를 추가하고 싶으면 WebMvcConfigurer 의 addFormatters 를 오버라이드 해야함
 public class WebConfig implements WebMvcConfigurer {
 
     @Override

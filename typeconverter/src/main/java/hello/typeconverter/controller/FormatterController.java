@@ -28,11 +28,14 @@ public class FormatterController {
         return "formatter-view";
     }
 
+    //@NumberFormat 과 @DateTimeFormat 은 스프링이 제공하는 기본 포맷터를 사용할 때 쓴다.
     @Data
     static class Form {
+        //숫자 관련 포맷터 사용, ex) 10000인 숫자가 10,000의 문자로 변환
         @NumberFormat(pattern = "###,###")
         private Integer number;
 
+        //날짜 관련 포맷터 사용
         @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
         private LocalDateTime localDateTime;
     }
