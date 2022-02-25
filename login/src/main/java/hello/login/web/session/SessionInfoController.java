@@ -25,6 +25,7 @@ public class SessionInfoController {
         //세션 id 출력
         log.info("session id = {}", session.getId());
         //세션을 비활성화 시키는 시간간격(초), 일정 시간 이상 접속하지 않으면 세션을 비활성화 시킴
+        //setMaxInactiveInterval()로 timeout 설정 가능, application.properties 에 server.servlet.session.timeout 로 글로벌 설정 가능
         log.info("getMaxInactiveInterval = {}", session.getMaxInactiveInterval());
         //세션 생성 시간 출력
         log.info("CreationTime = {}", new Date(session.getCreationTime()));

@@ -10,11 +10,13 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.UUID;
 
 @Slf4j
+//스프링 인터셉터는 HandlerInterceptor 를 구현해야한다.
 public class LogInterceptor implements HandlerInterceptor {
 
 
     public static final String LOG_ID = "logId";
 
+    //컨트롤러 호출 전에 호출된다.
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 
@@ -35,11 +37,13 @@ public class LogInterceptor implements HandlerInterceptor {
         return true;
     }
 
+    //컨트롤러 호출 후 호출된다. 컨트롤러에서 예외가 발생하면 postHandle 은 호출되지 않는다.
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
         log.info("postHandle [{}]", modelAndView);
     }
 
+    //컨트롤러 호출 후 호출된다. : afterCompletion 은 항상 호출된다. 이 경우 예외( ex )를 파라미터로 받아서 어떤 예외가 발생했는지 로그로 출력할 수 있다.
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
         String requestURI = request.getRequestURI();

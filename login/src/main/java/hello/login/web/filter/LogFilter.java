@@ -8,15 +8,18 @@ import java.io.IOException;
 import java.util.UUID;
 
 @Slf4j
+//필터는 Filter를 구현해야함
 public class LogFilter implements Filter {
 
+    //필터 초기화할 때 호출됨
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
         Filter.super.init(filterConfig);
         log.info("log filter init");
     }
 
-    @Override
+    //필터의 메인 로직직
+   @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         log.info("log filter doFilter");
 
@@ -37,6 +40,7 @@ public class LogFilter implements Filter {
         }
     }
 
+    //필터가 소멸될 때 호출됨
     @Override
     public void destroy() {
         Filter.super.destroy();
