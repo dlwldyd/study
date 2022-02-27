@@ -141,6 +141,8 @@ public class JpaMain {
 
             // 객체에서 다운캐스팅처럼 사용할 때 treat 를 사용한다.(Item 객체를 Book 으로 다운캐스팅, author 는 Book 에만 있음)
             //List<Item> resultList13 = em.createQuery("select i from Item i where treat(i as Book).author", Item.class)
+            // type 을 사용해서 엔티티 타입을 검사할 수 있다.
+            //List<Item> resultList14 = em.createQuery("select i from Item i where type(i) in (Book, Movie)", Item.class)
             //        .getResultList();
 
             //NameQuery 사용
