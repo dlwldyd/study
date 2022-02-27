@@ -44,6 +44,7 @@ public class ItemController {
         Item item = new Item(form.getItemName(), attachFile, storeImageFiles);
         itemRepository.save(item);
 
+        //컨트롤러에서 리다이렉트시 RedirectAttributes 를 통해 경로변수를 줄 수 있다.
         redirectAttributes.addAttribute("itemId", item.getId());
 
         return "redirect:/items/{itemId}";
@@ -56,12 +57,14 @@ public class ItemController {
         return "item-view";
     }
 
+    //이미지 파일을 반환하는 핸들러 메서드, 파일을 반환할 때는 UrlResource("file:파일이 위치한 경로")를 반환해야한다.
     @ResponseBody
     @GetMapping("images/{filename}")
     public Resource downloadImage(@PathVariable String filename) throws MalformedURLException {
         return new UrlResource("file:" + fileStore.getFullPath(filename));
     }
 
+    //파일을 반환하는 메서드(첨부파일 링크가 있고 해당 링크를 클릭하면 파일 다운로드, 클릭시 서버로 /attach/{itemId} url로 요청을 보냄)
     @GetMapping("/attach/{itemId}")
     public ResponseEntity<Resource> downloadAttach(@PathVariable Long itemId) throws MalformedURLException {
         Item item = itemRepository.findById(itemId);
@@ -77,7 +80,12 @@ public class ItemController {
         //첨부파일임을 나타내는 헤더값
         String contentDisposition = "attachment; filename=\"" + encodedUploadFile + "\"";
 
-        return ResponseEntity.ok()
+        /*
+        클라이언트가 파일을 브라우저에서 읽도록 하는게 아니라 다운로드를 하게 만드려면 Content-Disposition 헤더값을
+        attachment; filename="(파일의 경로)"로 세팅하고 body 에 UrlResource 를 넣어야 한다.(ResponseEntity 사용)
+        UrlResource 를 그대로 반환하면 파일 내용이 브라우저에 그대로 보이게 됨
+         */
+        return ResponseEntity.ok() // http 상태코드를 200 ok로 생성
                 .header(HttpHeaders.CONTENT_DISPOSITION, contentDisposition)
                 .body(resource);
     }

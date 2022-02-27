@@ -9,8 +9,10 @@
         <h2>상품 조회</h2>
     </div>
     상품명: <span th:text="${item.itemName}">상품명</span><br/>
+<!--    첨부파일 명으로 링크가 걸리고 링크를 클릭하면 /attach/{itemId} 의 url 로 서버에 요청을 보냄-->
     첨부파일: <a th:if="${item.attachFile}" th:href="|/attach/${item.id}|"
              th:text="${item.getAttachFile().getUploadFileName()}" /><br/>
+<!--    이미지 파일을 브라우저에 출력, th:src="이미지 파일을 반환하는 url 경로"-->
     <img th:each="imageFile : ${item.imageFiles}" th:src="|/images/${imageFile.getStoreFileName()}|" width="300" height="300"/>
 </div> <!-- /container -->
 </body>

@@ -14,6 +14,7 @@ import java.util.UUID;
 @Component
 public class FileStore {
 
+    //application.properties 에 설정한 값을 주입한다.
     @Value("${file.dir}")
     public String fileDir;
 
@@ -39,6 +40,7 @@ public class FileStore {
         //서버에 저장하는 파일명 : (uuid).(확장자)
         String storeFileName = createStoreFileName(originalFilename);
 
+        //파일을 지정한 경로에 저장한다.
         multipartFile.transferTo(new File(getFullPath(storeFileName)));
 
         return new UploadFile(originalFilename, storeFileName);

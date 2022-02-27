@@ -35,6 +35,7 @@ public class SpringUploadController {
     }
 
     @PostMapping("/upload")
+    //MultipartFile file : 업로드된 파일이 바인딩 된다.
     public String saveFile(@RequestParam String itemName,
                            @RequestParam MultipartFile file, HttpServletRequest request) throws IOException {
         log.info("request={}", request);
@@ -42,8 +43,10 @@ public class SpringUploadController {
         log.info("multipartFile={}", file);
 
         if (!file.isEmpty()) {
+            //file.getOriginalFilename() : 업로드된 파일명을 반환한다.
             String fullPath = fileDir + file.getOriginalFilename();
             log.info("파일 저장 fullPath={}", fullPath);
+            //파일을 지정한 경로에 저장한다.
             file.transferTo(new File(fullPath));
         }
 
