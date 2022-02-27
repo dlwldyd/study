@@ -28,7 +28,7 @@ public class Member2 extends BaseEntity {
 
     //FetchType.EAGER 를 하면 실제 팀 테이블을 조인해서 엔티티를 가져온다.
     @ManyToOne(fetch = FetchType.LAZY) //member 가 many, team 은 one(n:1 연관관계)
-    @JoinColumn(name = "TEAM_ID") //join 하는 컬럼이름(Member2의 외래키 컬럼 이름이 TEAM_ID가 됨)
+    @JoinColumn(name = "TEAM_ID") //join 하는 컬럼이름(Member2의 외래키 컬럼 이름이 TEAM_ID가 됨), 나머지 속성은 @Column 과 비슷
     private Team team;
 
     /*
@@ -53,8 +53,11 @@ public class Member2 extends BaseEntity {
     */
 
     // 값 타입 컬렉션의 경우 별도의 테이블이 생성됨
-    // 값 타입 컬렉션은 값 타입 컬렉션을 포함하는 엔티티와 lifecycle 을 함께한다.
-    // 값 타입 컬렉션은 지연로딩 전략을 기본으로 사용한다.
+    /*
+    값 타입 컬렉션은 값 타입 컬렉션을 포함하는 엔티티와 lifecycle 을 함께한다.
+    (값 타입 컬렉션은 영속성 전이(CASCADE.ALL) + 고아 객체 제거 기능을 필수로 가진다고 볼 수 있다.)
+     */
+    // 값 타입 컬렉션은 지연로딩 전략을 default 로 사용한다.
     /*
     엔티티와의 차이점은 엔티티는 기본키가 될 ID를 따로 만들어 줄 수 있지만
     값타입 컬렉션은 전체 컬럼이 기본키가 되고 ID를 만들어 줄 수 없음

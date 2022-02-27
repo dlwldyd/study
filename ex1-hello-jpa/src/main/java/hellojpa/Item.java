@@ -3,6 +3,9 @@ package hellojpa;
 import javax.persistence.*;
 
 //@Entity
+//InheritanceType.JOINED : 개별타입 기준 테이블 변환, 가장 많이 사용
+//InheritanceType.SINGLE_TABLE : 슈퍼타입 기준 테이블 변환
+//InheritanceType.TABLE_PER_CLASS : 서브타입 기준 테이블 변환, 거의 사용 안함
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 //해당 row 가 어떤 서브타입에 속하는지 나타내는 컬럼이 추가된다. 상속관계 매핑 시 사용하는 것이 좋다.(기본값 : DTYPE)
 //JOINED 전략에서는 @DiscriminatorColumn 을 안쓰면 DTYPE이 추가가 안된다.

@@ -21,7 +21,8 @@ public class Parent {
     //child 엔티티가 parent 엔티티 하나와만 연관관계에 있고 lifecycle 이 같을 때 사용하면된다.(연관관계가 많으면 사용하면 안됨)
 
     //orphanRemoval : true 일 때 childList 에서 빠진 엔티티는 Child 테이블에서 삭제된다.(@OneToMany, @OneToOne 에만 있음)
-    // parent 를 삭제하면 childList 에 있는 모든 child 가 테이블에서 삭제된다.(CascadeType.REMOVE 처럼 동작)
+    //자식엔티티가 부모엔티티와 연관관계가 끊어지면 자동으로 삭제된다.
+    //parent 를 삭제하면 childList 에 있는 모든 child 가 테이블에서 삭제된다.(CascadeType.REMOVE 처럼 동작)
     //child 엔티티가 parent 엔티티와만 연관관계에 있을 때 사용해야한다.
     @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Child> childList = new ArrayList<>();

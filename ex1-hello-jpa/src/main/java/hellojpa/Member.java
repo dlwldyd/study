@@ -30,8 +30,8 @@ public class Member {
     // 기본키 매핑, 기본키를 직접 할당 하려면 @Id만 사용하면 된다.
     // strategy : 기본키 생성 전략을 정한다.
     // GenerationType.AUTO : db 방언에 맞춰서 기본키를 생성한다.(기본값)
-    // GenerationType.IDENTITY : 기본키 생성을 데이터베이스에 위임한다.
-    // GenerationType.SEQUENCE : sequence 객체를 통해 기본키 생성
+    // GenerationType.IDENTITY : 기본키 생성을 데이터베이스에 위임한다.(MYSQL)
+    // GenerationType.SEQUENCE : sequence 객체를 통해 기본키 생성(ORACLE)
     // GenerationType.TABLE : 키 생성 전용 테이블을 만들어서 SEQUENCE 전략처럼 사용(데이터베이스에 따라 SEQUENCE 를 사용하지 못할 수 있기 때문에)
     // generator : SequenceGenerator 나 TableGenerator 를 지정할 수 있음(저거 2개 사용시 필수)
     @Id
