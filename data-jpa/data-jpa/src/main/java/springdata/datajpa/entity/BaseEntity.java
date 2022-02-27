@@ -13,6 +13,7 @@ import javax.persistence.EntityListeners;
 import javax.persistence.MappedSuperclass;
 import java.time.LocalDateTime;
 
+//Auditing 어노테이션 사용시 필수
 @EntityListeners(AuditingEntityListener.class)
 @MappedSuperclass
 @Getter

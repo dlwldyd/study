@@ -14,11 +14,15 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
+//JpaRepository<엔티티 타입, 기본키의 타입>
+//사용자 정의 인터페이스를 구현
 public interface MemberRepository extends JpaRepository<Member, Long>, MemberRepositoryCustom {
 
     List<Member> findByUsernameAndAgeGreaterThan(String username, int age);
 
     //find(...)By -> ...은 적든 안적든 필드명을 적든 모든 엔티티 반환
+    //find 외에도 count, exists, delete, remove 등 다른 것도 가능
+    //distinct, first, top 등 부가적인 것도 들어갈 수 있음 ex) findMemberDistinctByUsername, findFirst3By
     List<Member> findTop3UsernameBy();
 
     //쿼리 생성 순서

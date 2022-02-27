@@ -42,8 +42,8 @@ public class MemberController {
     //default 로 20개씩 나옴(localhost:8080/members 라고 보내면 localhost:8080/members?page=0 과 같이 나옴
     //application.properties 에 spring.data.web.pageable.default-age-size 로 글로벌로 페이지 사이즈 설정 가능
     //page 지정해서 원하는 페이지 받을 수 있음
-    //@PageableDefault 어노테이션을 통해 해당 핸들러메서드에 대해서만 설정 변경 가능
-    //마지막에 페이지 정보가 붙음
+    //@PageableDefault 어노테이션을 사용하여 해당 핸들러메서드에 대해서만 기본 페이징 설정을 바꿀 수 있다.
+    //API 마지막에 페이지 정보가 붙음
     //size 로 개수 지정 가능(localhost:8080/members?page=0&size=3)
     //sort 로 sorting 조건 넣을 수 있음(localhost:8080/members?sort=username,desc&sort=age,desc)
     @GetMapping("/members")
@@ -53,4 +53,18 @@ public class MemberController {
                 new MemberDto(member.getId(), member.getUsername(), null));
         return map;
     }
+
+    /* @Qualifier 어노테이션을 사용하여 url 파라미터를 통해 여러 페이징 정보를 받을 수 있다.(@Qualifier 에는 접두사명을 넣는다)
+    @GetMapping("/members")
+    public Page<MemberDto> list(
+            @PageableDefault(size = 10, sort = "username", direction = Sort.Direction.DESC) @Qualifier("member") Pageable memberPageable,
+            @Qualifier("team") Pageable teamPageable) {
+        Page<Member> memberPage = memberRepository.findAll(memberPageable);
+        Page<Team> teamPage = teamRepository.findAll(teamPageable);
+
+        Page<MemberDto> map = page.map(member ->
+                new MemberDto(member.getId(), member.getUsername(), null));
+        return map;
+    }
+     */
 }
