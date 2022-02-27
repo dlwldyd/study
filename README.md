@@ -1,40 +1,253 @@
-# 인텔리제이 단축키
-* Alt+insert : 함수 자동 생성
-* Ctrl+p : 파라미터 정보 보기(어떤 파라미터를 넣어야하는 지 알 수 있음)
-* Ctrl+Shift+Enter : 마지막에 세미콜론찍고 해당줄의 끝으로 감, 세미콜론이 찍혀있는데 쓰면 아래줄로 내려감
-* Shift+F6 : 변수, 함수이름 한꺼번에 rename
-* Ctrl+Alt+v : 변수 자동생성
-* Ctrl+Alt+Shift+t : 리팩토링과 관련된 메뉴가 뜬다.
-* Ctrl+Shift+t : 테스트 하고싶은 클래스에서 Ctrl+Shift+t 를 하면 자동으로 패키지와 파일이 만들어진다.
-* shift+f10 : 이전에 실행했던 코드를 다시 샐행함
-* Ctrl+e : 최근에 봤던 파일 목록을 확인할 수 있다. 바로 엔터하면 바로 이전에 봤던 파일로 돌아갈 수 있다.
-* Shift+Tab : Tab(들여쓰기)의 반대
-* psvm : 에디터에 psvm이라 치면 자동으로 public static void main(String args[]) 만들어줌
-* Ctrl+Alt+M : extract method 리팩토링 단축키
-* iter : 에디터에 iter이라 치고 Tab누르면 for문 자동 완성
-* soutv : 에디터에 soutv이라 치면 자동으로 System.out.println() 만들어줌(변수 출력)
-* soutm : 에디터에 soutm이라 치면 자동으로 System.out.println() 만들어줌(메소드로 출력)
-* Shift 2번 : search
-* Ctrl+f12 : 클래스 구성 볼 수 있음
-* Ctrl+O : 오버라이드할 함수 목록 볼 수 있음
-* Ctrl+Alt+C : 상수 생성(상수로 뺌)
-* Alt+1 : 프로젝트 탭으로 넘어갈 수 있음
-* 프로젝트 탭에서 ESC : 코드 탭으로 넘어갈 수 있음
-* Ctrl+Alt+B : 함수를 구현한 클래스로 이동, 객체를 생성한 클래스로 이동, 인터페이스를 구현한 클래스로 이동
-* /** 하고 엔터 : javadocs 생성
-* List이름.iter : List에 대한 for문 자동 완성
-* Ctrl+Shift+F : 파일, 디렉토리 내에서 문자열 찾기
-* Ctrl+Shift+R : 파일, 디렉토리 내에서 문자열 찾아서 대체
-* Ctrl+R : 문자열 찾아서 대체
-* Ctrl+Alt+N : 인라인 한줄로 만들기
-* f2 : 오류 있는 곳으로 바로 이동
-* Alt+Shift+insert : column selection mode
-* Ctrl+Alt+p : 파라미터로 받기
-* Ctrl+Shift+f9 : devtools 사용 시 현재 파일만 재컴파일
-* Ctrl+Shift+u : 대소문자 변환
-* Ctrl+Shift+(↑ or ↓) : 메서드 위치 변경
-* Alt+f8 : evaluate
-# 자바
+# 스프링
+## 스프링 빈
+* [configuration 방식 DI](/core/src/main/java/hello/core/AppConfig.java)
+* [컴포넌트 스캔 대상 설정](/core/src/main/java/hello/core/AutoAppConfig.java)
+* __DI 방식__
+  + [생성자 주입](/core/src/main/java/hello/core/member/MemberServiceImpl.java)
+  + [수정자 주입](/core/src/main/java/hello/core/order/OrderServiceImpl.java)
+  + [필드 주입](/aop/src/test/java/hello/aop/internalcall/CallServiceV1Test.java)
+* __같은 타입의 빈이 여러개 있을 때__
+  + [@Qualifier1](/core/src/main/java/hello/core/member/MemberServiceImpl.java)
+  + [@Qualifier2, @Primary](/core/src/main/java/hello/core/member/MemoryMemberRepository.java)
+  + [@Qualifier를 커스텀 어노테이션 으로 만들어서 컴파일시 타입 체크 되도록 하기](/core/src/main/java/hello/core/annotation/MainDiscountPolicy.java)
+* [@PostContruct, @PreDestroy](/core/src/test/java/hello/core/lifecycle/NetworkClient.java)
+* __빈 스코프__
+  + [싱글톤 스코프](/core/src/test/java/hello/core/scope/SingletonTest.java)
+  + [프로토타입 스코프](/core/src/test/java/hello/core/scope/PrototypeTest.java)
+  + [싱글톤 빈에 프로토타입 빈 주입 받기](/core/src/test/java/hello/core/scope/SingletonWithPrototypeTest1.java)
+  + [웹 스코프](/core/src/main/java/hello/core/common/MyLogger.java)
+## 스프링 MVC
+* __컨트롤러__
+  + [URL 매핑(@RequestMapping 등) 및 관련 속성](/springmvc/src/main/java/hello/springmvc/basic/request/RequestParamController.java)
+  + [@PathVariable](/springmvc/src/main/java/hello/springmvc/basic/request/RequestParamController.java)
+  + [@RequestParam, @ModelAttribute](/springmvc/src/main/java/hello/springmvc/basic/request/RequestParamController.java)
+  + [@ModelAtttribute 2](/form/src/main/java/hello/itemservice/web/form/FormItemController.java)
+  + [HttpEntity, @RequestBody String으로 받기](/springmvc/src/main/java/hello/springmvc/basic/request/RequestBodyStringController.java)
+  + [HttpEntity, @RequestBody JSON으로 받기, JSON 반환](/springmvc/src/main/java/hello/springmvc/basic/request/RequestBodyJsonController.java)
+  + [@ControllerAdvice, @RestControllerAdvice](exception/src/main/java/hello/exception/exhandler/advice/ExControllerAdvice.java)
+  + [RedirectAttributes, 리다이렉트시 경로변수 주기](/upload/src/main/java/hello/upload/controller/ItemController.java)
+* __thymeleaf__
+  + [th:text, &#91;&#91;...&#93;&#93;](/thymeleaf-basic/src/main/resources/templates/basic/text-basic.html)
+  + [unescape 하기 : th:utext, &#91;(...)&#93;](/thymeleaf-basic/src/main/resources/templates/basic/text-unescaped.html)
+  + [${...}, SpEL 표현식 사용, 지역변수 사용](/thymeleaf-basic/src/main/resources/templates/basic/variable.html)
+  + [타임리프 기본 객체(#request, #response, #session 등)](/thymeleaf-basic/src/main/resources/templates/basic/basic-objects.html)
+  + [날짜 관련 유틸리티 객체](/thymeleaf-basic/src/main/resources/templates/basic/date.html)
+  + [th:href](/thymeleaf-basic/src/main/resources/templates/basic/link.html)
+  + [리터럴, 리터럴 대체 문법 : |...|사용](/thymeleaf-basic/src/main/resources/templates/basic/literal.html)
+  + [연산식, Elvis(?:), no-operation(_)](/thymeleaf-basic/src/main/resources/templates/basic/operation.html)
+  + [th:attrappend, th:attrprepend, th:classappend, th:checked](/thymeleaf-basic/src/main/resources/templates/basic/attribute.html)
+  + [반복 : th:each](/thymeleaf-basic/src/main/resources/templates/basic/each.html)
+  + [조건문 : th:if, th:unless, th:switch, th:case](/thymeleaf-basic/src/main/resources/templates/basic/condition.html)
+  + [타임리프 주석](/thymeleaf-basic/src/main/resources/templates/basic/comments.html)
+  + [블록으로 묶어서 타임리프 기능 사용 : th:block](/thymeleaf-basic/src/main/resources/templates/basic/block.html)
+  + [자바 스크립트 인라인 : th:inline="javascript"](/thymeleaf-basic/src/main/resources/templates/basic/javascript.html)
+  + __템플릿 조각 활용__
+    - [th:fragment](/thymeleaf-basic/src/main/resources/templates/template/fragment/footer.html)
+    - [th:insert, th:replace](/thymeleaf-basic/src/main/resources/templates/template/fragment/fragmentMain.html)
+  + __템플릿 레이아웃1(일부 태그만 레이아웃을 활용)__
+    - [레이아웃에 태그 전달(~{::tagName}), 실제 페이지 컨텐츠](/thymeleaf-basic/src/main/resources/templates/template/layout/layoutMain.html)
+    - [레이아웃](/thymeleaf-basic/src/main/resources/templates/template/layout/base.html)
+  + __템플릿 레이아웃2(전체 html 파일에 대해 레이아웃을 활용)__
+    - [레이아웃에 태그 전달(~{::tagName}), 실제 페이지 컨텐츠](/thymeleaf-basic/src/main/resources/templates/template/layoutExtend/layoutExtendMain.html)
+    - [레이아웃](/thymeleaf-basic/src/main/resources/templates/template/layoutExtend/layoutFile.html)
+  + [th:object, th:field, *{...}](/form/src/main/resources/templates/form/addForm.html)
+  + [validation에서의 th:field](/validation/src/main/resources/templates/validation/v2/addForm.html)
+  + [th:for, ${#ids.prev(...)}, ${#ids.next(...)}, ${#ids.seq(...)}](/form/src/main/resources/templates/form/addForm.html)
+* __메세지, 국제화__
+  + [messages.properties](/message/src/main/resources/messages.properties)
+  + [messages_en.properties](/message/src/main/resources/messages_en.properties)
+  + [메세지 테스트 코드, 메세지 적용 순서](/message/src/test/java/hello/itemservice/message/MessageSourceTest.java)
+  + [타임리프 적용 : #{...}](/message/src/main/resources/templates/message/item.html)
+* __Validation__
+  + [Validator 구현](/validation/src/main/java/hello/itemservice/web/validation/ItemValidator.java)
+  + [@InitBinder, Validator 추가(init() 메서드 보기)](/validation/src/main/java/hello/itemservice/web/validation/ValidationItemControllerV2.java)
+  + [@Validated, BindingResult](/validation/src/main/java/hello/itemservice/web/validation/ValidationItemControllerV4.java)
+  + [#fields, th:errors, th:errorclass](/validation/src/main/resources/templates/validation/v4/addForm.html)
+  + [검증 에러 메세지 설정](/validation/src/main/resources/errors.properties)
+  + [필드 오류, Bean Validation](/validation/src/main/java/hello/itemservice/web/validation/form/ItemSaveForm.java)
+  + [글로벌 오류](/validation/src/main/java/hello/itemservice/web/validation/ValidationItemControllerV4.java)
+* __필터, 인터셉터__
+  + [서블릿 필터](/login/src/main/java/hello/login/web/filter/LogFilter.java)
+  + [서블릿 필터 등록](/login/src/main/java/hello/login/WebConfig.java)
+  + [스프링 인터셉터](/login/src/main/java/hello/login/web/interceptor/LogInterceptor.java)
+  + [스프링 인터셉터 등록](/login/src/main/java/hello/login/WebConfig.java)
+* __커스텀 ArgumentResolver 사용하기__
+  + [커스텀 어노테이션 생성(꼭 만들 필요는 없음)](/login/src/main/java/hello/login/web/argumentresolver/Login.java)
+  + [커스텀 ArgumentResolver](/login/src/main/java/hello/login/web/argumentresolver/LoginMemberArgumentResolver.java)
+  + [커스텀 ArgumentResolver 등록](/login/src/main/java/hello/login/WebConfig.java)
+* __오류 처리, 오류 페이지__
+  + [오류 페이지 요청에 대한 필터, 인터셉터 설정](/exception/src/main/java/hello/exception/WebConfig.java)
+  + __뷰에 어떤 오류정보 노출할지 설정__
+    - [application.properties](/exception/src/main/resources/application.properties)
+    - [뷰](/exception/src/main/resources/templates/error/500.html)
+  + [ExceptionResolver 직접 구현](/exception/src/main/java/hello/exception/resolver/MyHandlerExceptionResolver.java)
+  + [내가 만든 예외 발생 시 오류코드 설정 : @ResponseStatus](/exception/src/main/java/hello/exception/exception/BadRequestException.java)
+  + [예외 발생 시 오류코드 바꾸기, 메세지 바꾸기 : ResponseStatusException](exception/src/main/java/hello/exception/api/ApiExceptionController.java)
+  + [API(JSON) 방식 오류 처리 : @ExceptionHandler](exception/src/main/java/hello/exception/exhandler/advice/ExControllerAdvice.java)
+  + [예외 처리 메서드 따로 분리하기](exception/src/main/java/hello/exception/exhandler/advice/ExControllerAdvice.java)
+* __타입 컨버터__
+  + [커스텀 타입 컨버터](/typeconverter/src/main/java/hello/typeconverter/converter/StringToIpPortConverter.java)
+  + [커스텀 포맷터](/typeconverter/src/main/java/hello/typeconverter/formatter/MyNumberFormatter.java)
+  + [@NumberFormat, @DateTimeFormat](/typeconverter/src/main/java/hello/typeconverter/controller/FormatterController.java)
+  + [커스텀 타입 컨버터, 포맷터 추가](/typeconverter/src/main/java/hello/typeconverter/WebConfig.java)
+  + __타입 컨버터, 포매터 사용하기__
+    - [뷰(thymeleaf)에 타입 컨버터 적용1(출력 시) : ${{...}}](/typeconverter/src/main/resources/templates/converter-view.html)
+    - [뷰(thymeleaf)에 타입 컨버터 적용2(입력 시) : th:field](/typeconverter/src/main/resources/templates/converter-form.html)
+    - [컨트롤러에서 타입 컨버터 적용](/typeconverter/src/main/java/hello/typeconverter/controller/ConverterController.java)
+* __파일 업로드__
+  + [업로드할 때 파일명, 저장할 때 파일 명 분리하기](/upload/src/main/java/hello/upload/domain/UploadFile.java)
+  + [저장할 객체, MultipartFile 그대로 저장X](/upload/src/main/java/hello/upload/domain/Item.java)
+  + [바인딩할 form, MultipartFile 이란](/upload/src/main/java/hello/upload/controller/ItemForm.java)
+  + [데이터베이스에 파일 그대로 저장X, 파일이 저장된 경로를 저장](/upload/src/main/java/hello/upload/file/FileStore.java)
+  + [업로드 사이즈 제한](/upload/src/main/resources/application.properties)
+  + __클라이언트가 서버에 파일 저장__
+    - [뷰](/upload/src/main/resources/templates/item-form.html)
+    - [파일 저장](/upload/src/main/java/hello/upload/controller/ItemController.java)
+  + __클라이언트가 서버에서 파일 다운로드 받기__
+    - [뷰, th:src](/upload/src/main/resources/templates/item-view.html)
+    - [파일 다운로드 받기(downloadAttach() 보기)](/upload/src/main/java/hello/upload/controller/ItemController.java)
+    - [이미지 파일 받기(downloadImage() 보기)](/upload/src/main/java/hello/upload/controller/ItemController.java)
+## AOP
+* [@Aspect, AOP 만들기, 어드바이저 만들기](/aop/src/main/java/hello/aop/order/aop/AspectV1.java)
+* __포인트컷 분리, 모듈화__
+  + [모듈화X](/aop/src/main/java/hello/aop/order/aop/AspectV2.java)
+  + __모듈화O__
+    - [포인트컷](/aop/src/main/java/hello/aop/order/aop/Pointcuts.java)
+    - [모듈화한 포인트컷 사용](/aop/src/main/java/hello/aop/order/aop/AspectV4Pointcut.java)
+  + [애스펙트 적용 순서](/aop/src/main/java/hello/aop/order/aop/AspectV5Order.java)
+  + [어드바이스 종류 : @Around, @Before, @AfterReturning, @AfterThrowing, @After](/aop/src/main/java/hello/aop/order/aop/AspectV6Advice.java)
+  + [포인트컷 테스트](/aop/src/test/java/hello/aop/pointcut/ExecutionTest.java)
+* __AspectJ 포인트컷 표현식__
+  + [execution](/aop/src/test/java/hello/aop/pointcut/ExecutionTest.java)
+  + [선언 타입만 사용 : within](/aop/src/test/java/hello/aop/pointcut/WithinTest.java)
+  + [파라미터만 사용 : args](/aop/src/test/java/hello/aop/pointcut/ArgsTest.java)
+  + __@target, @within, 클래스 타겟 어노테이션 사용__
+    - [커스텀 어노테이션](/aop/src/main/java/hello/aop/member/annotation/ClassAop.java)
+    - [커스텀 어노테이션 적용 및 @target, @within 사용](/aop/src/test/java/hello/aop/pointcut/AtTargetWithinTest.java)
+  + __@annotation, 메서드 타겟 어노테이션 사용__
+    - [커스텀 어노테이션](/aop/src/main/java/hello/aop/member/annotation/MethodAop.java)
+    - [커스텀 어노테이션 적용](/aop/src/main/java/hello/aop/member/MemberServiceImpl.java)
+    - [@anntation 사용](/aop/src/test/java/hello/aop/pointcut/AtAnnotationTest.java)
+  + [스프링 빈 이름으로 조인포인트 선정 : bean](/aop/src/test/java/hello/aop/pointcut/BeanTest.java)
+  + [조인포인트의 파라미터를 어드바이스에 전달](/aop/src/test/java/hello/aop/pointcut/ParameterTest.java)
+  + [this, target](/aop/src/test/java/hello/aop/pointcut/ThisTargetTest.java)
+## JPA
+* [persist, find, remove, clear, detach, flush, close, 더티 체킹](/ex1-hello-jpa/src/main/java/hellojpa/JpaMain.java)
+* [@Entity, @Table](/ex1-hello-jpa/src/main/java/hellojpa/Member.java)
+* [@Column](/ex1-hello-jpa/src/main/java/hellojpa/Member.java)
+* [@Enumerated](/ex1-hello-jpa/src/main/java/hellojpa/Member.java)
+* [@Temporal](/ex1-hello-jpa/src/main/java/hellojpa/Member.java)
+* [@Lob](/ex1-hello-jpa/src/main/java/hellojpa/Member.java)
+* [@Transient](/ex1-hello-jpa/src/main/java/hellojpa/Member.java)
+* [@Id, @GeneratedValue, @SequenceGenerator, @TableGenerator](/ex1-hello-jpa/src/main/java/hellojpa/Member.java)
+* [다대일 연관관계 : @ManyToOne, @JoinColumn](/ex1-hello-jpa/src/main/java/hellojpa/Member2.java)
+* [일대다 연관관계 : @OneToMany](/ex1-hello-jpa/src/main/java/hellojpa/Team.java)
+* [일대일 연관관계 : @OneToOne](/ex1-hello-jpa/src/main/java/hellojpa/Member2.java)
+* __다대다 연관관계__
+  + [엔티티1(Member)](/ex1-hello-jpa/src/main/java/hellojpa/Member2.java)
+  + [연결엔티티, 연결테이블(MemberTable)](/ex1-hello-jpa/src/main/java/hellojpa/MemberProduct.java)
+  + [엔티티2(Product)](/ex1-hello-jpa/src/main/java/hellojpa/Product.java)
+* __양방향 연관관계__
+  + [연관관계 주인](/ex1-hello-jpa/src/main/java/hellojpa/Member2.java)
+  + [mappedBy](/ex1-hello-jpa/src/main/java/hellojpa/Team.java)
+* [fetchType : LAZY, EAGER](/ex1-hello-jpa/src/main/java/hellojpa/Member2.java)
+* [LAZY 전략의 N+1문제 해결 : @BatchSize](/jpql/src/main/java/jpql/Team.java)
+* __슈퍼타입, 서브타입__
+  + [슈퍼타입(Item) : @Inheritance, @DiscriminatorColumn](/ex1-hello-jpa/src/main/java/hellojpa/Item.java)
+  + [서브타입(Album) : @DiscriminatorValue](/ex1-hello-jpa/src/main/java/hellojpa/Album.java)
+* __BaseEntity, 공통 매핑 정보, @MappedSuperclass__
+  + [BaseEntity, @MappedSuperclass](/ex1-hello-jpa/src/main/java/hellojpa/BaseEntity.java)
+  + [BaseEntity 상속](/ex1-hello-jpa/src/main/java/hellojpa/Team.java)
+* [영속성 전이 : cascade](/ex1-hello-jpa/src/main/java/hellojpa/Parent.java)
+* [고아객체 : orphanRemoval](/ex1-hello-jpa/src/main/java/hellojpa/Parent.java)
+* __값 타입__
+  + [임베디드 타입 : @Embeddable](/ex1-hello-jpa/src/main/java/hellojpa/Address.java)
+  + [임베디드 타입 사용 : @Embedded](/ex1-hello-jpa/src/main/java/hellojpa/Member2.java)
+  + [하나의 엔티티에서 같은 임베디드 타입 여러번 사용, @AttributeOverrides](/ex1-hello-jpa/src/main/java/hellojpa/Member2.java)
+  + [값 타입 컬렉션 : @ElementCollection, @CollectionTable](/ex1-hello-jpa/src/main/java/hellojpa/Member2.java)
+* __JPQL__
+  + [JPQL 결과 받기 : getResultList(), getSingleResult()](/jpql/src/main/java/jpql/JpaMain.java)
+  + [파라미터 바인딩 : setParameter()](/jpql/src/main/java/jpql/JpaMain.java)
+  + [내부조인, 외부조인, 세타조인](/jpql/src/main/java/jpql/JpaMain.java)
+  + [연관관계가 없는 내부조인, 연관관계가 없는 외부조인 : on 절](/jpql/src/main/java/jpql/JpaMain.java)
+  + [JPQL에서 타입 표현, 프로젝션, new](/jpql/src/main/java/jpql/JpaMain.java)
+  + [페이징 : setFirstResult(), setMaxResult()](/jpql/src/main/java/jpql/JpaMain.java)
+  + [조건식 : case, coalesce, nullif](/jpql/src/main/java/jpql/JpaMain.java)
+  + [JPQL 기본 함수 : concat, substring, locate 등](/jpql/src/main/java/jpql/JpaMain.java)
+  + [경로 탐색](/jpql/src/main/java/jpql/JpaMain.java)
+  + [페치조인, 컬렉션 페치 조인, distinct](/jpql/src/main/java/jpql/JpaMain.java)
+  + [타입 검사 : type, treat](/jpql/src/main/java/jpql/JpaMain.java)
+  + __NamedQuery__
+    - [@NamedQueries, @NamedQuery](/jpql/src/main/java/jpql/Member.java)
+    - [NamedQuery 사용](/jpql/src/main/java/jpql/JpaMain.java)
+  + [벌크성 쿼리](/jpql/src/main/java/jpql/JpaMain.java)
+  + __사용자 정의 함수 사용__
+    - [사용자 정의 함수 등록](/jpql/src/main/java/dialect/MyH2Dialect.java)
+    - [방언으로 등록](/jpql/src/main/resources/META-INF/persistence.xml)
+    - [사용자 정의 함수 사용](/jpql/src/main/java/jpql/JpaMain.java)
+* [테스트에서 @Transactional, @Rollback](/jpashop/src/test/java/jpabook/jpashop/service/MemberServiceTest.java)
+* [@Transactional의 readOnly 속성](/jpashop/src/main/java/jpabook/jpashop/service/MemberService.java)
+* [이벤트 어노테이션 : @PrePersist, @PostPersist, @PreUpdate, @PostUpdate](/data-jpa/data-jpa/src/main/java/springdata/datajpa/entity/JpaBaseEntity.java)
+## 스프링 데이터 JPA
+* [리포지토리 만들기 : JpaRepository<>](/data-jpa/data-jpa/src/main/java/springdata/datajpa/repository/MemberRepository.java)
+* [리포지토리 메서드 정의, 메서드 반환 타입, @Param(파라미터 바인딩)](/data-jpa/data-jpa/src/main/java/springdata/datajpa/repository/MemberRepository.java)
+* [NamedQuery : @Query](/data-jpa/data-jpa/src/main/java/springdata/datajpa/repository/MemberRepository.java)
+* __페이징__
+  + [Page<> 반환, @Query의 countQuery 속성](/data-jpa/data-jpa/src/main/java/springdata/datajpa/repository/MemberRepository.java)
+  + [Slice<> 반환](/data-jpa/data-jpa/src/main/java/springdata/datajpa/repository/MemberRepository.java)
+  + [List<> 반환](/data-jpa/data-jpa/src/main/java/springdata/datajpa/repository/MemberRepository.java)
+  + [Page<>, Slice<> 반환시 메서드의 파라미터로 들어가는 Pageable, PageRequest](/data-jpa/data-jpa/src/test/java/springdata/datajpa/repository/MemberRepositoryTest.java)
+  + [엔티티를 Page\<DTO>, Slice\<DTO>로 변환 : map()](/data-jpa/data-jpa/src/test/java/springdata/datajpa/repository/MemberRepositoryTest.java)
+  + [Page<>, Slice<>의 메서드](/data-jpa/data-jpa/src/test/java/springdata/datajpa/repository/MemberRepositoryTest.java)
+  + [url에서 페이징 정보 받기, @PageableDefault](/data-jpa/data-jpa/src/main/java/springdata/datajpa/controller/MemberController.java)
+* [벌크성 쿼리 : @Modifying](/data-jpa/data-jpa/src/main/java/springdata/datajpa/repository/MemberRepository.java)
+* [@EntityGraph(한정적인 페치조인)](/data-jpa/data-jpa/src/main/java/springdata/datajpa/repository/MemberRepository.java)
+* [@QueryHints](/data-jpa/data-jpa/src/main/java/springdata/datajpa/repository/MemberRepository.java)
+* [@Lock](/data-jpa/data-jpa/src/main/java/springdata/datajpa/repository/MemberRepository.java)
+* __메서드 직접 구현__
+  + [사용자 정의 인터페이스, 구현할 메서드 정의](/data-jpa/data-jpa/src/main/java/springdata/datajpa/repository/MemberRepositoryCustom.java)
+  + [사용자 정의 인터페이스 구현, 메서드 직접 구현](/data-jpa/data-jpa/src/main/java/springdata/datajpa/repository/MemberRepositoryImpl.java)
+  + [구현한 인터페이스를 리포지토리가 상속](/data-jpa/data-jpa/src/main/java/springdata/datajpa/repository/MemberRepository.java)
+* __Auditing__
+  + [@CreatedDate, @LastModifiedDate, @CreatedBy, @LastModifiedBy, @EntityListeners(AuditingEntityListener.class)](/data-jpa/data-jpa/src/main/java/springdata/datajpa/entity/BaseEntity.java)
+  + [AuditAware<> 스프링 빈으로 등록, @EnableJpaAuditing](/data-jpa/data-jpa/src/main/java/springdata/datajpa/DataJpaApplication.java)
+* [Persistable<>](/data-jpa/data-jpa/src/main/java/springdata/datajpa/entity/Item.java)
+## QueryDSL
+* [QueryDSL 설정](/querydsl/querydsl/build.gradle)
+* [select 쿼리](/querydsl/querydsl/src/test/java/orm/querydsl/QuerydslBasicTest.java)
+* [결과 조회 : fetch(), fetchOne(), fetchFirst()](/querydsl/querydsl/src/test/java/orm/querydsl/QuerydslBasicTest.java)
+* [정렬 : orderBy(), desc(), asc(), nullsLast(), nullsFirst()](/querydsl/querydsl/src/test/java/orm/querydsl/QuerydslBasicTest.java)
+* [페이징 : offset(), limit()](/querydsl/querydsl/src/test/java/orm/querydsl/QuerydslBasicTest.java)
+* [집합 함수 : count(), sum(), avg(), max(), min()](/querydsl/querydsl/src/test/java/orm/querydsl/QuerydslBasicTest.java)
+* [그룹핑 : groupBy(), having()](/querydsl/querydsl/src/test/java/orm/querydsl/QuerydslBasicTest.java)
+* [기본 조인 : join(), innerJoin(), leftJoin(), rightJoin()](/querydsl/querydsl/src/test/java/orm/querydsl/QuerydslBasicTest.java)
+* [세타 조인](/querydsl/querydsl/src/test/java/orm/querydsl/QuerydslBasicTest.java)
+* [조인 대상 필터링, 연관관계가 없는 외부조인 : on()](/querydsl/querydsl/src/test/java/orm/querydsl/QuerydslBasicTest.java)
+* [페치 조인 : fetchJoin()](/querydsl/querydsl/src/test/java/orm/querydsl/QuerydslBasicTest.java)
+* [서브 쿼리 : JPAExpressions](/querydsl/querydsl/src/test/java/orm/querydsl/QuerydslBasicTest.java)
+* [case 문 : CaseBuilder(), when(), then(), otherwise()](/querydsl/querydsl/src/test/java/orm/querydsl/QuerydslBasicTest.java)
+* [상수 더하기 : Expressions.constant()](/querydsl/querydsl/src/test/java/orm/querydsl/QuerydslBasicTest.java)
+* [문자 붙이기 : concat(), stringValue()](/querydsl/querydsl/src/test/java/orm/querydsl/QuerydslBasicTest.java)
+* [Tuple](/querydsl/querydsl/src/test/java/orm/querydsl/QuerydslBasicTest.java)
+* __DTO 반환__
+  + __자바 빈 프로퍼티 주입 방식, 필드 주입 방식, 생정자 주입 방식__
+    - [QueryDSL에 의존X DTO 클래스](/querydsl/querydsl/src/main/java/orm/querydsl/dto/UserDto.java)
+    - [Projections.bean(), Projections.fields(), Projections.constructor()](/querydsl/querydsl/src/test/java/orm/querydsl/QuerydslBasicTest.java)
+    - [alias 주기 : as(), ExpressionUtils.as()](/querydsl/querydsl/src/test/java/orm/querydsl/QuerydslBasicTest.java)
+  + __DTO에 대한 Q파일 생성 방식__
+    - [QueryDSL에 의존적인 DTO 클래스, @QueryProjection](/querydsl/querydsl/src/main/java/orm/querydsl/dto/MemberDto.java)
+    - [Q클래스 사용 : new QMemberDto()](/querydsl/querydsl/src/test/java/orm/querydsl/QuerydslBasicTest.java)
+* __동적 쿼리__
+  + [BooleanBuilder 사용](/querydsl/querydsl/src/test/java/orm/querydsl/QuerydslBasicTest.java)
+  + [where절 사용, BooleanExpression 사용](/querydsl/querydsl/src/test/java/orm/querydsl/QuerydslBasicTest.java)
+* [벌크성 쿼리 : update(), delete(), execute()](/querydsl/querydsl/src/test/java/orm/querydsl/QuerydslBasicTest.java)
+* [SQL function 사용 : Expressions.stringTemplate()](/querydsl/querydsl/src/test/java/orm/querydsl/QuerydslBasicTest.java)
+* __스프링 데이터 JPA, QueryDSL 통합__
+  + [Repository](/querydsl/querydsl/src/main/java/orm/querydsl/repository/MemberRepository.java)
+  + [RepositoryCustom](/querydsl/querydsl/src/main/java/orm/querydsl/repository/MemberRepositoryCustom.java)
+  + [RepositoryCustomImpl](/querydsl/querydsl/src/main/java/orm/querydsl/repository/MemberRepositoryCustomImpl.java)
+  + [QueryDSL에서 페이징 : PageableExecutionUtils.getPage(), SliceImpl<>](/querydsl/querydsl/src/main/java/orm/querydsl/repository/MemberRepositoryCustomImpl.java)
+# 잡다
 ## Collection
 ## Stack
 * .push(인자)로 스택 추가
@@ -94,3 +307,12 @@
 * 문자열을 숫자로 변환할때는 Integer.valueOf(문자열), Integer.parseInt(문자열)을 사용하면 된다. 정석적으로는 parseInt가 정석이지만 성능이나 기능상으로 똑같으니깐 어떤 것을 쓰든 상관x
 * PatternMatchUtils, StringUtils, UriUtils 등 유용한 유틸리티 객체 있음
 * 함수 내부호출 할 때 앞쪽에 this가 생략된 거임
+* [커스텀 어노테이션](core/src/main/java/hello/core/annotation/MainDiscountPolicy.java)
+* [로그 찍기](/springmvc/src/main/java/hello/springmvc/basic/LogTestController.java)
+* [enum 타입 discription 추가해서 정의하기](/form/src/main/java/hello/itemservice/domain/item/ItemType.java)
+* [쿠키 생성 및 사용(loginV1, logoutV1 보기)](/login/src/main/java/hello/login/web/login/LoginController.java)
+* __세션 생성 및 사용__
+  + [세션1(loginV4, logoutV3 보기)](/login/src/main/java/hello/login/web/login/LoginController.java)
+  + [세션2](/login/src/main/java/hello/login/web/session/SessionInfoController.java)
+* [Provider, ObjectProvider](/core/src/test/java/hello/core/scope/SingletonWithPrototypeTest1.java)
+* [테스트, mock 요청, 응답 : MockHttpServletRequest, MockHttpServletResponse](/login/src/test/java/hello/login/web/session/SessionManagerTest.java)
