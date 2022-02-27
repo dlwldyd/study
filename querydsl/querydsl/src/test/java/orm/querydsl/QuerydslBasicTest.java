@@ -176,6 +176,9 @@ public class QuerydslBasicTest {
         assertThat(result.size()).isEqualTo(2);
     }
 
+    /**
+     * JPQL이 제공하는 모든 집합함수 제공
+     */
     @Test
     void aggregation() {
 
@@ -819,6 +822,7 @@ public class QuerydslBasicTest {
     void sqlFunction() {
 
         //select function('replace', m.username, 'member', 'M') from Member m
+        //application.properties에 등록한 데이터베이스 dialect에 해당 함수가 등록되어 있어야 사용 가능하다.
         List<String> result = queryFactory
                 .select(Expressions.stringTemplate(
                         "function('replace', {0}, {1}, {2})",
