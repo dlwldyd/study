@@ -72,7 +72,7 @@
   + [스프링 인터셉터](/login/src/main/java/hello/login/web/interceptor/LogInterceptor.java)
   + [스프링 인터셉터 등록](/login/src/main/java/hello/login/WebConfig.java)
 * __커스텀 ArgumentResolver 사용하기__
-  + [커스텀 어노테이션 생성(꼭 만들 필요는 없음)](/login/src/main/java/hello/login/web/argumentresolver/Login.java)
+  + [커스텀 어노테이션 생성](/login/src/main/java/hello/login/web/argumentresolver/Login.java)
   + [커스텀 ArgumentResolver](/login/src/main/java/hello/login/web/argumentresolver/LoginMemberArgumentResolver.java)
   + [커스텀 ArgumentResolver 등록](/login/src/main/java/hello/login/WebConfig.java)
 * __오류 처리, 오류 페이지__
