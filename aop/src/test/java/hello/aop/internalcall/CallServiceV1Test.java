@@ -12,6 +12,7 @@ import org.springframework.context.annotation.Import;
 @SpringBootTest
 class CallServiceV1Test {
 
+    //필드 주입은 테스트 외에는 왠만하면 안쓰는게 좋다.
     @Autowired
     CallServiceV1 callServiceV1;
 

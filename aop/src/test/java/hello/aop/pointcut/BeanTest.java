@@ -25,6 +25,9 @@ public class BeanTest {
 
     @Aspect
     static class BeanAspect {
+        //스프링 빈의 이름으로 조인포인트를 선정한다.
+
+        //스프링 빈의 이름이 orderService 인 빈과 Repository 라는 이름으로 끝나는 빈의 모든 메서드가 조인포인트로 선정된다.
         @Around("bean(orderService) || bean(*Repository)")
         public Object doLog(ProceedingJoinPoint joinPoint) throws Throwable {
             log.info("[bean] {}", joinPoint.getSignature());

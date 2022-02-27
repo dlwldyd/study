@@ -31,6 +31,8 @@ public class ExecutionTest {
     //가장 정확한 포인트 컷(특정 메서드, 파라미터 타입 콕찍는 포인트컷)
     @Test
     void exactMatch() {
+        //'?'가 붙은거는 생략 가능
+        //선언타입 -> 메서드가 정의된 클래스(타입)의 경로(패키지 경로)라 보면됨
         //execution(접근제어자? 반환타입 선언타입?메서드이름(파라미터) 예외?)
         //public java.lang.String hello.aop.member.MemberServiceImpl.hello(java.lang.String)
         pointcut.setExpression("execution(public String hello.aop.member.MemberServiceImpl.hello(String))");
@@ -40,6 +42,7 @@ public class ExecutionTest {
     //가장 많이 생략한 포인트컷(생략할 것은 전부 생략하고 모든 메서드에 적용되는 포인트컷)
     @Test
     void allMatch() {
+        //'*'은 와일드 카드, 모든 문자열 가능
         //execution(접근제어자? 반환타입 선언타입?메서드이름(파라미터) 예외?)
         pointcut.setExpression("execution(* *(..))");
         assertThat(pointcut.matches(helloMethod, MemberServiceImpl.class)).isTrue();
@@ -96,6 +99,8 @@ public class ExecutionTest {
 
     @Test
     void packageMatchSubPackage1() {
+        //'.' -> 정확하게 해당 위치의 패키지
+        //'..' -> 해당 위치의 패키지와 그 하위 패키지도 포함
         //execution(접근제어자? 반환타입 선언타입?메서드이름(파라미터) 예외?)
         pointcut.setExpression("execution(* hello.aop.member..*.*(..))");
         assertThat(pointcut.matches(helloMethod, MemberServiceImpl.class)).isTrue();
@@ -117,6 +122,9 @@ public class ExecutionTest {
 
     @Test
     void typeMatchSuperType() {
+        //선언타입을 매칭할 때 선언타입의 자식타입은 포인트컷 대상이 된다.
+        //단, 자식 타입의 메서드 중 선언타입에 있지 않은 메서드는 포인트컷 대상이 되지 않는다.
+        //MemberServiceImpl 은 MemberService 를 구현하고 MemberService 에 hello 메서드가 존재하므로 포인트컷 대상이 됨
         //execution(접근제어자? 반환타입 선언타입?메서드이름(파라미터) 예외?)
         pointcut.setExpression("execution(* hello.aop.member.MemberService.*(..))");
         assertThat(pointcut.matches(helloMethod, MemberServiceImpl.class)).isTrue();
@@ -125,6 +133,7 @@ public class ExecutionTest {
     @Test
     void typeMatchNoSuperTypeMethodFalse() throws NoSuchMethodException {
         //execution(접근제어자? 반환타입 선언타입?메서드이름(파라미터) 예외?)
+        //MemberServiceImpl 은 MemberService 를 구현하지만 MemberService 에 internal 메서드가 존재하지 않으므로 포인트컷 대상이 되지 않음
         pointcut.setExpression("execution(* hello.aop.member.MemberService.*(..))");
         Method internalMethod = MemberServiceImpl.class.getMethod("internal", String.class);
         assertThat(pointcut.matches(internalMethod, MemberServiceImpl.class)).isFalse();

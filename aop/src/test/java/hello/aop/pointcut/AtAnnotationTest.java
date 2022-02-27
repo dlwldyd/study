@@ -18,19 +18,20 @@ public class AtAnnotationTest {
     @Autowired
     MemberService memberService;
 
-    @Test
-    void success() {
-        log.info("memberService proxy={}", memberService.getClass());
-        memberService.hello("helloA");
-    }
-
     @Aspect
     static class AtAnnotationAspect {
+        //@annotation 은 단독 사용 가능
 
         @Around("@annotation(hello.aop.member.annotation.MethodAop)")
         public Object doAtAnnotation(ProceedingJoinPoint joinPoint) throws Throwable {
             log.info("[@annotation] {}", joinPoint.getSignature());
             return joinPoint.proceed();
         }
+    }
+
+    @Test
+    void success() {
+        log.info("memberService proxy={}", memberService.getClass());
+        memberService.hello("helloA");
     }
 }

@@ -9,6 +9,7 @@ import org.aspectj.lang.annotation.Aspect;
 @Aspect
 public class AspectV4Pointcut {
 
+    //전체 패키지 경로 써줘야함
     @Around("hello.aop.order.aop.Pointcuts.allOrder()")
     public Object doLog(ProceedingJoinPoint joinPoint) throws Throwable {
         //joinPoint.getSignature() : 반환타입, 패키지, 클래스이름, 파라미터 정보, 실행된 메서드 정보가 들어있음
